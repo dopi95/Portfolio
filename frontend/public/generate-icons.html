@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Icons</title>
+</head>
+<body>
+    <h2>Icon Generator</h2>
+    <p>Click the buttons to download the icons:</p>
+    <button onclick="generateIcon(192)">Download 192x192</button>
+    <button onclick="generateIcon(512)">Download 512x512</button>
+    
+    <script>
+        function generateIcon(size) {
+            const svg = `<svg width="${size}" height="${size}" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f97316;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ea580c;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#grad)" rx="100"/>
+  <text x="256" y="370" font-family="Arial, sans-serif" font-size="320" font-weight="bold" fill="#ffffff" text-anchor="middle">E</text>
+</svg>`;
+            
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            const img = new Image();
+            const blob = new Blob([svg], { type: 'image/svg+xml' });
+            const url = URL.createObjectURL(blob);
+            
+            img.onload = function() {
+                ctx.drawImage(img, 0, 0, size, size);
+                canvas.toBlob(function(blob) {
+                    const link = document.createElement('a');
+                    link.download = `icon-${size}.png`;
+                    link.href = URL.createObjectURL(blob);
+                    link.click();
+                    URL.revokeObjectURL(url);
+                });
+            };
+            
+            img.src = url;
+        }
+    </script>
+</body>
+</html>
