@@ -127,7 +127,7 @@ const Experience = () => {
             </div>
 
             {/* Education */}
-            <div id="education" className="mt-16 lg:mt-30">
+            <div id="education" className="mt-16 lg:mt-0">
               <h2 className="text-2xl md:text-3xl font-bold text-center text-orange-500 mb-8" style={{ fontFamily: 'Montserrat, sans-serif' }}>
                 Education
               </h2>

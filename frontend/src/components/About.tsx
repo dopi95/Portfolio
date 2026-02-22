@@ -31,7 +31,7 @@ const About = () => {
         >
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-orange-500" style={{ fontFamily: 'Montserrat, sans-serif' }}>About Me</h2>
           
-          <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="grid md:grid-cols-2 gap-8 items-start">
             {/* Animated Illustration */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -39,7 +39,7 @@ const About = () => {
               transition={{ delay: 0.2 }}
               className="flex justify-center"
             >
-              <div className="relative w-full max-w-sm">
+              <div className="relative w-full">
                 {/* Developer coding illustration */}
                 <motion.div 
                   className="relative rounded-2xl overflow-hidden shadow-2xl"
@@ -49,32 +49,8 @@ const About = () => {
                   <img 
                     src="/images/elabout.png" 
                     alt="Developer coding"
-                    className="w-full h-auto rounded-2xl"
+                    className="w-full h-full object-contain rounded-2xl"
                   />
-                  
-                  {/* Floating code symbols */}
-                  <motion.div 
-                    className="absolute top-6 left-6 text-orange-500 text-3xl font-bold drop-shadow-lg"
-                    animate={{ 
-                      y: [0, -10, 0],
-                      opacity: [0.7, 1, 0.7]
-                    }}
-                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    &lt;/&gt;
-                  </motion.div>
-                  
-                  {/* Floating brackets */}
-                  <motion.div 
-                    className="absolute top-6 right-6 text-orange-500 text-2xl font-bold drop-shadow-lg"
-                    animate={{ 
-                      scale: [1, 1.2, 1],
-                      opacity: [0.7, 1, 0.7]
-                    }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    {'{}'}
-                  </motion.div>
                   
                   {/* Gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-orange-500/20 to-transparent pointer-events-none"></div>
