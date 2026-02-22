@@ -121,15 +121,15 @@ const Skills = () => {
 
   return (
     <section id="skills" className="py-16 px-4 bg-light-cardHover dark:bg-dark-cardHover relative overflow-hidden">
-      {/* Zigzag pattern background */}
-      <div className="absolute inset-0 opacity-15">
-        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+      {/* Diagonal grid pattern background - same as About */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden opacity-25">
+        <svg className="absolute top-0 left-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
           <defs>
-            <pattern id="zigzag" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M0 20 L10 10 L20 20 L30 10 L40 20" stroke="rgba(249, 115, 22, 0.5)" strokeWidth="2" fill="none"/>
+            <pattern id="diagonal-grid-skills" width="40" height="40" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <rect width="40" height="40" fill="none" stroke="rgba(249, 115, 22, 0.4)" strokeWidth="1.2"/>
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#zigzag)" />
+          <rect width="100%" height="100%" fill="url(#diagonal-grid-skills)" />
         </svg>
       </div>
       

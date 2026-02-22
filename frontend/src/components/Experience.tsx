@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { FiBriefcase } from 'react-icons/fi'
+import { FiBriefcase, FiUsers, FiUser, FiBook } from 'react-icons/fi'
+import GitHubStats from './GitHubStats'
 
 const Experience = () => {
   const ref = useRef(null)
@@ -9,68 +10,194 @@ const Experience = () => {
 
   const experiences = [
     {
-      title: 'Senior Full Stack Developer',
-      company: 'Tech Company',
-      period: '2022 - Present',
-      description: 'Led development of scalable web applications using React, Node.js, and MongoDB. Mentored junior developers and implemented best practices.',
-      technologies: ['React', 'Node.js', 'MongoDB', 'TypeScript']
+      title: 'University & Bootcamp Projects',
+      subtitle: 'Academic & Training Projects',
+      status: 'Ongoing',
+      description: 'Completed various university projects and bootcamp assignments. Collaborated with teams on full-stack applications using MERN stack technologies.',
+      type: 'team'
     },
     {
-      title: 'Full Stack Developer',
-      company: 'Digital Agency',
-      period: '2020 - 2022',
-      description: 'Developed and maintained multiple client projects. Built RESTful APIs and responsive frontends.',
-      technologies: ['React', 'Express', 'PostgreSQL', 'Docker']
+      title: 'Full Stack Developer - BiruhKids Pediatric Clinic',
+      subtitle: 'Freelance Team Project',
+      status: 'Backend, UI/UX & Frontend Developer',
+      description: 'Developed a comprehensive digital healthcare platform for BiruhKids Pediatric Clinic in Addis Ababa. Handled backend development, UI/UX design, and frontend implementation.',
+      type: 'team'
     },
     {
-      title: 'Junior Developer',
-      company: 'Startup Inc',
-      period: '2019 - 2020',
-      description: 'Contributed to frontend development and learned backend technologies. Collaborated with cross-functional teams.',
-      technologies: ['JavaScript', 'React', 'Node.js', 'Git']
+      title: 'Full Stack Developer - Bluelight Academy SMS',
+      subtitle: 'Solo Freelance Project',
+      status: 'Complete Development (Solo)',
+      description: 'Built a comprehensive school management system for Bluelight Academy independently. Handled all aspects including UI/UX design, frontend development, backend architecture, and database design.',
+      type: 'solo'
+    },
+    {
+      title: 'Real Estate Website Developer',
+      subtitle: 'Freelance Team Project',
+      status: 'Team Project',
+      description: 'Developed a website for a real estate sales agent as part of a team. Contributed to UI/UX design, frontend development, and backend implementation.',
+      type: 'team'
+    }
+  ]
+
+  const education = [
+    {
+      degree: 'Bachelor of Science in Computer Science',
+      institution: 'Unity University',
+      period: '2022 - April 2026',
+      status: 'Graduated',
+      description: 'Specialized in Software Engineering and Web Development. Completed multiple university projects and gained hands-on experience with modern technologies.'
+    },
+    {
+      degree: 'Bachelor of Arts in BAIS',
+      institution: 'Addis Ababa University',
+      period: '2022 - July 2026',
+      status: 'Currently 5th Year Student',
+      description: 'Studying the intersection of business and technology, with coursework in management, information systems, and data analysis.'
+    },
+    {
+      degree: 'Full Stack Web Development Bootcamp',
+      institution: 'DirectEd Bootcamp',
+      period: '',
+      status: '',
+      description: 'Intensive program covering MongoDB, Express.js, React, and Node.js. Working on team projects and building full-stack applications.'
     }
   ]
 
   return (
-    <section id="experience" className="py-20 px-4">
-      <div className="max-w-6xl mx-auto">
+    <section id="experience" className="py-16 px-4 bg-light-cardHover dark:bg-dark-cardHover">
+      <div className="max-w-7xl mx-auto">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">Experience</h2>
-          
-          <div className="space-y-8">
-            {experiences.map((exp, index) => (
+          <div className="grid lg:grid-cols-2 gap-8">
+            {/* Experience */}
+            <div>
+              <div className="bg-light-cardHover dark:bg-dark-cardHover inline-block px-6 py-2 rounded-lg mb-8">
+                <h2 className="text-2xl md:text-3xl font-bold text-center text-orange-500" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                  Experience
+                </h2>
+              </div>
+              
               <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -50 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: index * 0.2 }}
-                className="bg-light-card dark:bg-dark-card p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all border border-light-border dark:border-dark-border"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ delay: 0.2, duration: 0.5 }}
+                className="bg-light-card dark:bg-dark-card p-6 rounded-2xl shadow-xl h-full"
               >
-                <div className="flex items-start space-x-4">
-                  <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-                    <FiBriefcase className="text-blue-600 dark:text-blue-400" size={24} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-1 text-light-text dark:text-dark-text">{exp.title}</h3>
-                    <p className="text-blue-600 dark:text-blue-400 font-semibold mb-2">{exp.company}</p>
-                    <p className="text-light-textSecondary dark:text-dark-textSecondary text-sm mb-3">{exp.period}</p>
-                    <p className="text-light-textSecondary dark:text-dark-textSecondary mb-4">{exp.description}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {exp.technologies.map((tech) => (
-                        <span key={tech} className="px-3 py-1 bg-light-cardHover dark:bg-dark-cardHover text-sm rounded-full border border-light-border dark:border-dark-border">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+                <div className="space-y-6">
+                  {experiences.map((exp, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, x: -30 }}
+                      animate={isInView ? { opacity: 1, x: 0 } : {}}
+                      transition={{ delay: 0.3 + index * 0.1 }}
+                      className="relative pl-6 border-l-2 border-orange-500/30 pb-6 last:pb-0"
+                    >
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={isInView ? { scale: 1 } : {}}
+                        transition={{ delay: 0.4 + index * 0.1 }}
+                        className="absolute -left-2.5 top-0 w-5 h-5 bg-orange-500 rounded-full border-4 border-light-card dark:border-dark-card"
+                      />
+                      
+                      <div className="flex items-start justify-between mb-2">
+                        <div className="flex-1">
+                          <h3 className="text-sm md:text-base font-bold text-light-text dark:text-dark-text mb-1">
+                            {exp.title}
+                          </h3>
+                          <p className="text-xs text-orange-500 font-semibold mb-1">{exp.subtitle}</p>
+                          <div className="flex items-center space-x-2 text-xs text-light-textSecondary dark:text-dark-textSecondary mb-2">
+                            {exp.type === 'solo' ? <FiUser size={12} /> : <FiUsers size={12} />}
+                            <span>{exp.status}</span>
+                          </div>
+                        </div>
+                        <div className="p-1.5 bg-orange-100 dark:bg-orange-900/30 rounded-lg ml-2">
+                          <FiBriefcase className="text-orange-500" size={16} />
+                        </div>
+                      </div>
+                      
+                      <p className="text-xs text-light-textSecondary dark:text-dark-textSecondary leading-relaxed">
+                        {exp.description}
+                      </p>
+                    </motion.div>
+                  ))}
                 </div>
               </motion.div>
-            ))}
+            </div>
+
+            {/* Education */}
+            <div id="education">
+              <div className="bg-light-cardHover dark:bg-dark-cardHover inline-block px-6 py-2 rounded-lg mb-8">
+                <h2 className="text-2xl md:text-3xl font-bold text-center text-orange-500" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                  Education
+                </h2>
+              </div>
+              
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ delay: 0.2, duration: 0.5 }}
+                className="bg-light-card dark:bg-dark-card p-6 rounded-2xl shadow-xl h-full"
+              >
+                <div className="space-y-6">
+                  {education.map((edu, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, x: 30 }}
+                      animate={isInView ? { opacity: 1, x: 0 } : {}}
+                      transition={{ delay: 0.3 + index * 0.1 }}
+                      className="relative pl-6 border-l-2 border-orange-500/30 pb-6 last:pb-0"
+                    >
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={isInView ? { scale: 1 } : {}}
+                        transition={{ delay: 0.4 + index * 0.1 }}
+                        className="absolute -left-2.5 top-0 w-5 h-5 bg-orange-500 rounded-full border-4 border-light-card dark:border-dark-card"
+                      />
+                      
+                      <div className="flex items-start justify-between mb-2">
+                        <div className="flex-1">
+                          <h3 className="text-sm md:text-base font-bold text-light-text dark:text-dark-text mb-1">
+                            {edu.degree}
+                          </h3>
+                          <p className="text-xs text-orange-500 font-semibold mb-1">{edu.institution}</p>
+                          {edu.period && (
+                            <p className="text-xs text-light-textSecondary dark:text-dark-textSecondary mb-1">
+                              {edu.period}
+                            </p>
+                          )}
+                          {edu.status && (
+                            <p className="text-xs text-light-textSecondary dark:text-dark-textSecondary mb-2 italic">
+                              {edu.status}
+                            </p>
+                          )}
+                        </div>
+                        <div className="p-1.5 bg-orange-100 dark:bg-orange-900/30 rounded-lg ml-2">
+                          <FiBook className="text-orange-500" size={16} />
+                        </div>
+                      </div>
+                      
+                      <p className="text-xs text-light-textSecondary dark:text-dark-textSecondary leading-relaxed">
+                        {edu.description}
+                      </p>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* GitHub Stats Section */}
+          <div style={{ marginTop: '8.25rem' }}>
+            <div className="text-center mb-10">
+              <h2 className="text-2xl md:text-3xl font-bold text-orange-500" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                GitHub Stats
+              </h2>
+            </div>
+            <GitHubStats />
           </div>
         </motion.div>
       </div>

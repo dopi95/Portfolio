@@ -44,6 +44,19 @@ html:not(.dark) #root {
   color: #1e293b;
 }
 
+/* Force white background for inputs in light mode */
+html:not(.dark) input,
+html:not(.dark) textarea {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+.dark input,
+.dark textarea {
+  background-color: #1a1f3a !important;
+  color: #ffffff !important;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
