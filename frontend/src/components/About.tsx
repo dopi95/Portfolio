@@ -52,18 +52,6 @@ const About = () => {
                     className="w-full h-auto rounded-2xl"
                   />
                   
-                  {/* Floating coffee cup */}
-                  <motion.div 
-                    className="absolute bottom-6 right-6 text-5xl drop-shadow-lg"
-                    animate={{ 
-                      y: [0, -15, 0],
-                      rotate: [-5, 5, -5]
-                    }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    ☕
-                  </motion.div>
-                  
                   {/* Floating code symbols */}
                   <motion.div 
                     className="absolute top-6 left-6 text-orange-500 text-3xl font-bold drop-shadow-lg"
