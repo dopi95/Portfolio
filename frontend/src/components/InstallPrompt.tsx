@@ -30,7 +30,7 @@ const InstallPrompt = () => {
       return
     }
     deferredPrompt.prompt()
-    const { outcome } = await deferredPrompt.userChoice
+    await deferredPrompt.userChoice
     setShowPrompt(false)
     setDeferredPrompt(null)
   }
@@ -50,7 +50,7 @@ const InstallPrompt = () => {
                 <div className="p-0.5 md:p-1.5 bg-orange-500 rounded">
                   <FiDownload className="text-white" size={10} />
                 </div>
-                <h3 className="font-bold text-[10px] md:text-sm text-light-text dark:text-dark-text">Install</h3>
+                <h3 className="font-bold text-[10px] md:text-sm text-light-text dark:text-dark-text">Install App</h3>
               </div>
               <button onClick={() => setShowPrompt(false)} className="p-0.5 hover:bg-light-cardHover dark:hover:bg-dark-cardHover rounded">
                 <FiX size={12} />
@@ -60,7 +60,7 @@ const InstallPrompt = () => {
               onClick={handleInstall}
               className="w-full px-1.5 py-0.5 md:px-3 md:py-1.5 bg-orange-500 hover:bg-orange-600 text-white rounded font-semibold text-[10px] md:text-xs"
             >
-              Install
+              Install App
             </button>
           </div>
         </motion.div>
