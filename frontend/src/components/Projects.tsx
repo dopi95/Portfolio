@@ -9,46 +9,60 @@ const Projects = () => {
 
   const projects = [
     {
-      title: 'E-Commerce Platform',
-      description: 'Full-featured online shopping platform with payment integration, user authentication, and admin dashboard. Built with modern technologies for seamless shopping experience.',
-      technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-      liveLink: 'https://demo.com',
-      repoLink: 'https://github.com/dopi95/ecommerce'
+      title: 'BiruhKids Pediatric Clinic Platform',
+      description: 'A professional freelance project completed in a team, creating a comprehensive digital healthcare platform for BiruhKids Pediatric Clinic in Addis Ababa, featuring online appointment booking, AI-powered chatbot, multi-role authentication, and bilingual support for pediatric care.',
+      technologies: ['React', 'Node', 'Express', 'MongoDB', 'Javascript', 'TailwindCSS'],
+      liveLink: 'https://www.biruhkidsclinic.com/',
+      repoLink: 'https://github.com/dopi95/BiruhKids-Pediatric-Speciality'
     },
     {
-      title: 'Task Management App',
-      description: 'Collaborative task management tool with real-time updates, team collaboration features, and progress tracking. Designed for efficient project management.',
-      technologies: ['React', 'Express', 'PostgreSQL', 'Socket.io'],
-      liveLink: 'https://demo.com',
-      repoLink: 'https://github.com/dopi95/taskmanager'
+      title: 'Ghion Homes Sales',
+      description: 'A professional freelance project completed in a team, creating a sleek real estate website to showcase listings and simplify client interactions for a Ghion Homes sales representative.',
+      technologies: ['HTML', 'CSS', 'Javascript', 'Node', 'Express', 'PostgreSQL'],
+      liveLink: 'https://ghionhomessales.com/',
+      repoLink: 'https://github.com/dopi95/Ghion-Homes-Sales'
     },
     {
-      title: 'Social Media Dashboard',
-      description: 'Analytics dashboard for social media metrics with data visualization, reporting features, and real-time insights for better decision making.',
-      technologies: ['React', 'TypeScript', 'Chart.js', 'Tailwind'],
-      liveLink: 'https://demo.com',
-      repoLink: 'https://github.com/dopi95/dashboard'
+      title: 'Bluelight Academy SMS',
+      description: 'A comprehensive full-stack school management system built for Bluelight Academy in Addis Ababa. Features complete administrative control over students, employees, payments, and system management with advanced role-based access control.',
+      technologies: ['React', 'Node', 'Express', 'MongoDB', 'Javascript', 'TailwindCSS'],
+      liveLink: '',
+      repoLink: 'https://github.com/dopi95/School-Management-System'
     },
     {
-      title: 'Weather App',
-      description: 'Real-time weather application with location-based forecasts, interactive maps, and detailed weather information for multiple cities.',
-      technologies: ['React', 'API Integration', 'Geolocation'],
-      liveLink: 'https://demo.com',
-      repoLink: 'https://github.com/dopi95/weather'
+      title: 'Nova Studio Ethiopia',
+      description: 'Premier creative production agency website in Addis Ababa, Ethiopia. Features multilingual support (English/Amharic), professional photography and videography showcase, social media management services, and digital marketing solutions with modern UI/UX.',
+      technologies: ['React', 'TypeScript', 'TailwindCSS', 'i18next', 'Vite', 'EmailJS'],
+      liveLink: 'https://novastudio.et',
+      repoLink: 'https://github.com/dopi95/Nova-Studio'
     },
     {
-      title: 'Blog Platform',
-      description: 'Modern blogging platform with markdown support, comments system, user profiles, and content management features for writers.',
-      technologies: ['Next.js', 'MongoDB', 'NextAuth', 'MDX'],
-      liveLink: 'https://demo.com',
-      repoLink: 'https://github.com/dopi95/blog'
+      title: 'Beton Kegna - Real Estate Sales Website',
+      description: 'A modern, responsive full-stack website for Beton Kegna real estate sales, showcasing luxury apartments, villas, and commercial properties in Addis Ababa with bilingual support, interactive galleries, and admin dashboard.',
+      technologies: ['Next.js', 'TypeScript', 'Node', 'Express', 'MongoDB', 'TailwindCSS'],
+      liveLink: 'https://betonkegna.vercel.app/',
+      repoLink: 'https://github.com/dopi95/BK'
     },
     {
-      title: 'Chat Application',
-      description: 'Real-time messaging app with group chats, file sharing, emoji support, and end-to-end encryption for secure communication.',
-      technologies: ['React', 'Socket.io', 'Node.js', 'Redis'],
-      liveLink: 'https://demo.com',
-      repoLink: 'https://github.com/dopi95/chat'
+      title: 'Kab Creative Lab',
+      description: 'A full-stack web application for managing creative portfolios, projects, and client communications. Features admin panel, user dashboard, portfolio showcase with media gallery, and JWT authentication.',
+      technologies: ['Next.js', 'React', 'TypeScript', 'Node', 'Express', 'MongoDB', 'TailwindCSS'],
+      liveLink: 'https://kabcreativelab.com',
+      repoLink: 'https://github.com/dopi95/Kab'
+    },
+    {
+      title: 'Artisan Blend Restaurant App',
+      description: 'A collaborative bootcamp project to build a dynamic and interactive web application for a fictional high-end restaurant called Artisan Blend. It features an immersive frontend experience alongside an AI-powered backend chatbot.',
+      technologies: ['React', 'Vite', 'TailwindCSS', 'Python'],
+      liveLink: 'https://artisan-blend.netlify.app/',
+      repoLink: 'https://github.com/dopi95/ArtisanBlend-Restaurant-App'
+    },
+    {
+      title: 'NoteDown - Modern Blogging Platform',
+      description: 'A collaborative bootcamp project creating a full-stack blogging application with CRUD operations, JWT authentication, image uploads, comments system, likes functionality, and AI chatbot integration.',
+      technologies: ['React', 'Node', 'Express', 'MongoDB', 'Javascript', 'TailwindCSS', 'Python'],
+      liveLink: 'https://notedowny.netlify.app/',
+      repoLink: 'https://github.com/Ishimweric/blogging_app'
     }
   ]
 
@@ -101,15 +115,17 @@ const Projects = () => {
                 </div>
 
                 <div className="flex space-x-4 pt-4 border-t border-light-border dark:border-dark-border">
-                  <a 
-                    href={project.liveLink} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-2 text-orange-500 hover:text-orange-600 transition-colors text-sm font-semibold"
-                  >
-                    <FiExternalLink size={16} />
-                    <span>Live</span>
-                  </a>
+                  {project.liveLink && (
+                    <a 
+                      href={project.liveLink} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center space-x-2 text-orange-500 hover:text-orange-600 transition-colors text-sm font-semibold"
+                    >
+                      <FiExternalLink size={16} />
+                      <span>Live</span>
+                    </a>
+                  )}
                   <a 
                     href={project.repoLink} 
                     target="_blank" 

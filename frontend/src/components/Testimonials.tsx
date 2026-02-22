@@ -14,37 +14,29 @@ const Testimonials = () => {
 
   const testimonials = [
     {
-      name: 'John Smith',
-      position: 'CEO, Tech Startup',
-      message: 'Elyas is an exceptional developer who delivered our project ahead of schedule. His attention to detail and problem-solving skills are outstanding.',
+      name: 'Dr. Fasil Menbere',
+      position: 'Pediatric Specialist, CEO & Founder at BiruhKids Pediatric Speciality',
+      message: 'Elyas delivered an exceptional healthcare platform for our clinic. His technical expertise and understanding of our needs resulted in a comprehensive system that has transformed how we serve our patients.',
       rating: 5,
-      avatar: 'JS',
-      photo: '' // Add photo URL here if available
-    },
-    {
-      name: 'Sarah Johnson',
-      position: 'Product Manager',
-      message: 'Working with Elyas was a pleasure. He understood our requirements perfectly and created a beautiful, functional application.',
-      rating: 5,
-      avatar: 'SJ',
+      avatar: 'FM',
       photo: ''
     },
     {
-      name: 'Michael Chen',
-      position: 'CTO, Digital Agency',
-      message: 'Highly skilled full-stack developer with excellent communication. Elyas brought innovative solutions to complex challenges.',
+      name: 'Mulugeta D.',
+      position: 'Real Estate Sales Consultant at Ghion Homes',
+      message: 'Working with Elyas was a great experience. He created a professional and sleek website that perfectly showcases our property listings and has significantly improved our client interactions.',
       rating: 5,
-      avatar: 'MC',
+      avatar: 'MD',
       photo: ''
     },
     {
-      name: 'Emily Davis',
-      position: 'Startup Founder',
-      message: 'Elyas transformed our vision into reality. His expertise in modern web technologies is impressive and his work ethic is commendable.',
+      name: 'Yenealem A.',
+      position: 'Founder & CEO at Bluelight Academy',
+      message: 'Elyas built an outstanding school management system for our academy. His dedication and technical skills resulted in a comprehensive platform that streamlined our entire administrative process.',
       rating: 5,
-      avatar: 'ED',
+      avatar: 'YA',
       photo: ''
-    }
+    },
   ]
 
   const TestimonialCard = ({ testimonial, index }: any) => (
@@ -52,35 +44,34 @@ const Testimonials = () => {
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ delay: index * 0.15 }}
-      className="bg-light-card dark:bg-dark-card p-8 rounded-xl shadow-lg h-full"
+      className="bg-light-card dark:bg-dark-card p-6 md:p-8 rounded-xl shadow-lg h-[400px] md:h-[380px] flex flex-col items-center"
     >
-      <div className="flex items-center mb-6">
-        {testimonial.photo ? (
-          <img 
-            src={testimonial.photo} 
-            alt={testimonial.name}
-            className="w-16 h-16 rounded-full object-cover mr-4"
-          />
-        ) : (
-          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center text-white font-bold text-xl mr-4">
-            {testimonial.avatar}
-          </div>
-        )}
-        <div>
-          <h3 className="font-bold text-lg text-light-text dark:text-dark-text">{testimonial.name}</h3>
-          <p className="text-sm text-light-textSecondary dark:text-dark-textSecondary">{testimonial.position}</p>
+      {testimonial.photo ? (
+        <img 
+          src={testimonial.photo} 
+          alt={testimonial.name}
+          className="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover mb-4"
+        />
+      ) : (
+        <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center text-white font-bold text-xl md:text-2xl mb-4">
+          {testimonial.avatar}
         </div>
-      </div>
+      )}
       
-      <div className="flex mb-4">
+      <div className="flex mb-3">
         {[...Array(testimonial.rating)].map((_, i) => (
-          <FiStar key={i} className="text-orange-500 fill-orange-500" size={18} />
+          <FiStar key={i} className="text-orange-500 fill-orange-500" size={16} />
         ))}
       </div>
       
-      <p className="text-base text-light-textSecondary dark:text-dark-textSecondary italic leading-relaxed">
+      <p className="text-sm md:text-base text-light-textSecondary dark:text-dark-textSecondary italic leading-relaxed text-center flex-1 overflow-y-auto mb-4">
         "{testimonial.message}"
       </p>
+
+      <div className="text-center">
+        <h3 className="font-bold text-base md:text-lg text-light-text dark:text-dark-text">{testimonial.name}</h3>
+        <p className="text-xs md:text-sm text-light-textSecondary dark:text-dark-textSecondary">{testimonial.position}</p>
+      </div>
     </motion.div>
   )
 
