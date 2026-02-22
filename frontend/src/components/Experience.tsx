@@ -75,11 +75,9 @@ const Experience = () => {
           <div className="grid lg:grid-cols-2 gap-8">
             {/* Experience */}
             <div>
-              <div className="bg-light-cardHover dark:bg-dark-cardHover inline-block px-6 py-2 rounded-lg mb-8">
-                <h2 className="text-2xl md:text-3xl font-bold text-center text-orange-500" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                  Experience
-                </h2>
-              </div>
+              <h2 className="text-2xl md:text-3xl font-bold text-center text-orange-500 mb-8" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                Experience
+              </h2>
               
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -129,12 +127,10 @@ const Experience = () => {
             </div>
 
             {/* Education */}
-            <div id="education">
-              <div className="bg-light-cardHover dark:bg-dark-cardHover inline-block px-6 py-2 rounded-lg mb-8">
-                <h2 className="text-2xl md:text-3xl font-bold text-center text-orange-500" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                  Education
-                </h2>
-              </div>
+            <div id="education" className="mt-16 lg:mt-30">
+              <h2 className="text-2xl md:text-3xl font-bold text-center text-orange-500 mb-8" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                Education
+              </h2>
               
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
