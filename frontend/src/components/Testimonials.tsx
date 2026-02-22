@@ -86,7 +86,7 @@ const Testimonials = () => {
         >
           <div className="bg-light-bg dark:bg-dark-bg inline-block px-8 py-2 rounded-lg mb-12 mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-center text-orange-500" style={{ fontFamily: 'Poppins, sans-serif' }}>
-              Testimonials
+              Client Testimonials
             </h2>
           </div>
           

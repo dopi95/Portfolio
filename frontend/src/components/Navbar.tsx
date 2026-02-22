@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { FiMenu, FiX, FiSun, FiMoon } from 'react-icons/fi'
+import { FiMenu, FiX, FiSun, FiMoon, FiDownload } from 'react-icons/fi'
 
 interface NavbarProps {
   darkMode: boolean
@@ -10,6 +10,8 @@ interface NavbarProps {
 const Navbar = ({ darkMode, toggleDarkMode }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null)
+  const [showInstall, setShowInstall] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,11 +21,32 @@ const Navbar = ({ darkMode, toggleDarkMode }: NavbarProps) => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  useEffect(() => {
+    const handler = (e: any) => {
+      e.preventDefault()
+      setDeferredPrompt(e)
+      setShowInstall(true)
+    }
+    window.addEventListener('beforeinstallprompt', handler)
+    return () => window.removeEventListener('beforeinstallprompt', handler)
+  }, [])
+
+  const handleInstall = async () => {
+    if (!deferredPrompt) return
+    deferredPrompt.prompt()
+    const { outcome } = await deferredPrompt.userChoice
+    if (outcome === 'accepted') {
+      setShowInstall(false)
+    }
+    setDeferredPrompt(null)
+  }
+
   const navLinks = [
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Skills', href: '#skills' },
     { name: 'Projects', href: '#projects' },
+    { name: 'Testimonials', href: '#testimonials' },
     { name: 'Contact', href: '#contact' },
   ]
 
@@ -67,6 +90,17 @@ const Navbar = ({ darkMode, toggleDarkMode }: NavbarProps) => {
                 {link.name}
               </motion.a>
             ))}
+            {showInstall && (
+              <motion.button
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                onClick={handleInstall}
+                className="px-3 py-1.5 bg-orange-500 hover:bg-orange-600 text-white rounded-lg flex items-center space-x-1 text-xs font-semibold"
+              >
+                <FiDownload size={14} />
+                <span>Install</span>
+              </motion.button>
+            )}
             <motion.button
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
