@@ -1,12 +1,11 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
-import { useRef, useState } from 'react'
-import { FiFileText, FiDownload, FiX } from 'react-icons/fi'
+import { useRef } from 'react'
+import { FiFileText } from 'react-icons/fi'
 
 const About = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
-  const [showCV, setShowCV] = useState(false)
 
   return (
     <section id="about" className="py-16 px-4 relative overflow-hidden">
@@ -90,68 +89,20 @@ const About = () => {
 
               {/* CV Button */}
               <div className="pt-4">
-                <button 
-                  onClick={() => setShowCV(true)}
-                  className="px-6 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all flex items-center space-x-2 font-semibold text-sm"
+                <a 
+                  href="/assets/Elyas_Yenealem_CV.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex px-6 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all items-center space-x-2 font-semibold text-sm"
                 >
                   <FiFileText size={18} />
                   <span>Preview CV</span>
-                </button>
+                </a>
               </div>
             </motion.div>
           </div>
         </motion.div>
       </div>
-
-      {/* CV Preview Modal */}
-      {showCV && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
-          onClick={() => setShowCV(false)}
-        >
-          <motion.div
-            initial={{ scale: 0.9 }}
-            animate={{ scale: 1 }}
-            className="bg-light-card dark:bg-dark-card rounded-xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex justify-between items-center p-4 border-b border-light-border dark:border-dark-border">
-              <h3 className="text-xl font-bold text-orange-500">My Resume</h3>
-              <div className="flex space-x-2">
-                <a
-                  href="/assets/Elyas_Yenealem_CV.pdf"
-                  download
-                  className="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg flex items-center space-x-2 text-sm"
-                >
-                  <FiDownload size={16} />
-                  <span>Download</span>
-                </a>
-                <button
-                  onClick={() => setShowCV(false)}
-                  className="p-2 hover:bg-light-cardHover dark:hover:bg-dark-cardHover rounded-lg"
-                >
-                  <FiX size={24} />
-                </button>
-              </div>
-            </div>
-            <div className="p-4 overflow-y-auto max-h-[calc(90vh-80px)]">
-              <object
-                data="/assets/Elyas_Yenealem_CV.pdf"
-                type="application/pdf"
-                className="w-full h-[600px] rounded-lg"
-              >
-                <embed
-                  src="/assets/Elyas_Yenealem_CV.pdf"
-                  type="application/pdf"
-                  className="w-full h-[600px] rounded-lg"
-                />
-              </object>
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
     </section>
   )
 }
