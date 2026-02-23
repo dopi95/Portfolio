@@ -138,7 +138,7 @@ const About = () => {
             </div>
             <div className="p-4 overflow-y-auto max-h-[calc(90vh-80px)]">
               <iframe
-                src="/assets/Elyas_Yenealem_CV.pdf"
+                src="/assets/Elyas_Yenealem_CV.pdf#toolbar=1"
                 className="w-full h-[600px] rounded-lg"
                 title="CV Preview"
               />

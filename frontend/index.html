@@ -14,6 +14,12 @@
     <title>Elyas Yenealem | Portfolio</title>
     <script>
       document.documentElement.classList.add('dark')
+      // Unregister old service worker
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(registrations => {
+          registrations.forEach(registration => registration.unregister())
+        })
+      }
     </script>
   </head>
   <body>
