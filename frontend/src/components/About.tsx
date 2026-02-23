@@ -137,11 +137,17 @@ const About = () => {
               </div>
             </div>
             <div className="p-4 overflow-y-auto max-h-[calc(90vh-80px)]">
-              <iframe
-                src="/assets/Elyas_Yenealem_CV.pdf#toolbar=1"
+              <object
+                data="/assets/Elyas_Yenealem_CV.pdf"
+                type="application/pdf"
                 className="w-full h-[600px] rounded-lg"
-                title="CV Preview"
-              />
+              >
+                <embed
+                  src="/assets/Elyas_Yenealem_CV.pdf"
+                  type="application/pdf"
+                  className="w-full h-[600px] rounded-lg"
+                />
+              </object>
             </div>
           </motion.div>
         </motion.div>
