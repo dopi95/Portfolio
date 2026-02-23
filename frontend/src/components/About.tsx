@@ -93,6 +93,10 @@ const About = () => {
                   href="/assets/Elyas_Yenealem_CV.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    window.open('/assets/Elyas_Yenealem_CV.pdf', '_blank')
+                  }}
                   className="inline-flex px-6 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all items-center space-x-2 font-semibold text-sm"
                 >
                   <FiFileText size={18} />
