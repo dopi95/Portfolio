@@ -49,9 +49,9 @@ const Navbar = ({ darkMode, toggleDarkMode }: NavbarProps) => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="text-2xl font-bold text-orange-500"
-            style={{ fontFamily: 'Poppins, sans-serif' }}
+            style={{ fontFamily: 'Montserrat, sans-serif' }}
           >
-            Elyas Yenealem
+            Elyas's Portfolio
           </motion.div>
 
           {/* Desktop Menu */}
