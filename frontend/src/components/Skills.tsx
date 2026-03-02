@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { FaReact, FaNodeJs, FaDocker, FaGitAlt, FaAws, FaHtml5, FaCss3Alt, FaPhp } from 'react-icons/fa'
-import { SiTypescript, SiNextdotjs, SiTailwindcss, SiExpress, SiMongodb, SiPostgresql, SiMysql, SiVercel, SiNetlify, SiRender, SiJavascript } from 'react-icons/si'
+import { FaReact, FaNodeJs, FaDocker, FaGitAlt, FaAws, FaHtml5, FaCss3Alt, FaPhp, FaJava, FaPython } from 'react-icons/fa'
+import { SiTypescript, SiNextdotjs, SiTailwindcss, SiExpress, SiMongodb, SiPostgresql, SiMysql, SiVercel, SiNetlify, SiRender, SiJavascript, SiCplusplus } from 'react-icons/si'
 import { VscCode } from 'react-icons/vsc'
 
 const Skills = () => {
@@ -36,6 +36,15 @@ const Skills = () => {
         { name: 'MongoDB', percent: 85, icon: SiMongodb, color: '#47A248' },
         { name: 'PostgreSQL', percent: 80, icon: SiPostgresql, color: '#4169E1' },
         { name: 'MySQL', percent: 80, icon: SiMysql, color: '#4479A1' },
+      ]
+    },
+    {
+      category: 'Programming Languages',
+      skills: [
+        { name: 'Java', percent: 85, icon: FaJava, color: '#007396' },
+        { name: 'Python', percent: 88, icon: FaPython, color: '#3776AB' },
+        { name: 'C++', percent: 80, icon: SiCplusplus, color: '#00599C' },
+        { name: 'JavaFX', percent: 75, icon: FaJava, color: '#007396' },
       ]
     },
     {
