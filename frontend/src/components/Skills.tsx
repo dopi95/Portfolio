@@ -1,72 +1,50 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { FaReact, FaNodeJs, FaDocker, FaGitAlt, FaAws, FaHtml5, FaCss3Alt, FaPhp, FaJava, FaPython } from 'react-icons/fa'
 import { SiTypescript, SiNextdotjs, SiTailwindcss, SiExpress, SiMongodb, SiPostgresql, SiMysql, SiVercel, SiNetlify, SiRender, SiJavascript, SiCplusplus } from 'react-icons/si'
 import { VscCode } from 'react-icons/vsc'
 
+const iconMap: any = {
+  FaReact, FaNodeJs, FaDocker, FaGitAlt, FaAws, FaHtml5, FaCss3Alt, FaPhp, FaJava, FaPython,
+  SiTypescript, SiNextdotjs, SiTailwindcss, SiExpress, SiMongodb, SiPostgresql, SiMysql,
+  SiVercel, SiNetlify, SiRender, SiJavascript, SiCplusplus, VscCode
+}
+
 const Skills = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
+  const [skills, setSkills] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
 
-  const skillCategories = [
-    {
-      category: 'Frontend',
-      skills: [
-        { name: 'HTML5', percent: 95, icon: FaHtml5, color: '#E34F26' },
-        { name: 'CSS3', percent: 90, icon: FaCss3Alt, color: '#1572B6' },
-        { name: 'JavaScript', percent: 90, icon: SiJavascript, color: '#F7DF1E' },
-        { name: 'React', percent: 90, icon: FaReact, color: '#61DAFB' },
-        { name: 'Next.js', percent: 85, icon: SiNextdotjs, color: '#000000' },
-        { name: 'TypeScript', percent: 85, icon: SiTypescript, color: '#3178C6' },
-        { name: 'Tailwind CSS', percent: 95, icon: SiTailwindcss, color: '#06B6D4' },
-      ]
-    },
-    {
-      category: 'Backend',
-      skills: [
-        { name: 'Node.js', percent: 88, icon: FaNodeJs, color: '#339933' },
-        { name: 'Express', percent: 90, icon: SiExpress, color: '#000000' },
-        { name: 'PHP', percent: 75, icon: FaPhp, color: '#777BB4' },
-      ]
-    },
-    {
-      category: 'Database',
-      skills: [
-        { name: 'MongoDB', percent: 85, icon: SiMongodb, color: '#47A248' },
-        { name: 'PostgreSQL', percent: 80, icon: SiPostgresql, color: '#4169E1' },
-        { name: 'MySQL', percent: 80, icon: SiMysql, color: '#4479A1' },
-      ]
-    },
-    {
-      category: 'Programming Languages',
-      skills: [
-        { name: 'Java', percent: 85, icon: FaJava, color: '#007396' },
-        { name: 'Python', percent: 88, icon: FaPython, color: '#3776AB' },
-        { name: 'C++', percent: 80, icon: SiCplusplus, color: '#00599C' },
-        { name: 'JavaFX', percent: 75, icon: FaJava, color: '#007396' },
-      ]
-    },
-    {
-      category: 'Tools & DevOps',
-      skills: [
-        { name: 'Git', percent: 90, icon: FaGitAlt, color: '#F05032' },
-        { name: 'Docker', percent: 75, icon: FaDocker, color: '#2496ED' },
-        { name: 'VS Code', percent: 95, icon: VscCode, color: '#007ACC' },
-        { name: 'AWS', percent: 70, icon: FaAws, color: '#FF9900' },
-      ]
-    },
-    {
-      category: 'Deployment',
-      skills: [
-        { name: 'Vercel', percent: 90, icon: SiVercel, color: '#000000' },
-        { name: 'Netlify', percent: 85, icon: SiNetlify, color: '#00C7B7' },
-        { name: 'Render', percent: 80, icon: SiRender, color: '#46E3B7' },
-      ]
+  useEffect(() => {
+    fetchSkills()
+  }, [])
+
+  const fetchSkills = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/skills')
+      if (response.ok) {
+        const data = await response.json()
+        setSkills(data)
+      }
+    } catch (error) {
+      console.error('Error loading skills:', error)
+    } finally {
+      setLoading(false)
     }
-  ]
+  }
 
-  const CircularProgress = ({ percent, name, icon: Icon, color, delay }: { percent: number, name: string, icon: any, color: string, delay: number }) => {
+  const groupedSkills = skills.reduce((acc: any, skill: any) => {
+    if (!acc[skill.category]) {
+      acc[skill.category] = []
+    }
+    acc[skill.category].push(skill)
+    return acc
+  }, {})
+
+  const CircularProgress = ({ percent, name, icon, color, delay }: { percent: number, name: string, icon: string, color: string, delay: number }) => {
+    const Icon = iconMap[icon] || FaReact
     const radius = 45
     const circumference = 2 * Math.PI * radius
     const offset = circumference - (percent / 100) * circumference
@@ -153,19 +131,22 @@ const Skills = () => {
             Technical Skills
           </h2>
           
+          {loading ? (
+            <div className="text-center py-12 text-light-textSecondary dark:text-dark-textSecondary">Loading...</div>
+          ) : (
           <div className="space-y-12">
-            {skillCategories.map((category, catIndex) => (
+            {Object.keys(groupedSkills).map((category, catIndex) => (
               <motion.div
-                key={category.category}
+                key={category}
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: catIndex * 0.2 }}
               >
                 <h3 className="text-xl md:text-2xl font-bold mb-6 text-light-text dark:text-dark-text">
-                  {category.category}
+                  {category}
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                  {category.skills.map((skill, skillIndex) => (
+                  {groupedSkills[category].map((skill: any, skillIndex: number) => (
                     <CircularProgress
                       key={skill.name}
                       name={skill.name}
@@ -179,6 +160,7 @@ const Skills = () => {
               </motion.div>
             ))}
           </div>
+          )}
         </motion.div>
       </div>
     </section>

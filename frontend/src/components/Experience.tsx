@@ -1,43 +1,32 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
-import { useRef } from 'react'
-import { FiBriefcase, FiUsers, FiUser, FiBook } from 'react-icons/fi'
+import { useRef, useState, useEffect } from 'react'
+import { FiBriefcase, FiBook } from 'react-icons/fi'
 import GitHubStats from './GitHubStats'
 
 const Experience = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
+  const [experiences, setExperiences] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
 
-  const experiences = [
-    {
-      title: 'University & Bootcamp Projects',
-      subtitle: 'Academic & Training Projects',
-      status: 'Ongoing',
-      description: 'Completed various university projects and bootcamp assignments. Collaborated with teams on full-stack applications using MERN stack technologies.',
-      type: 'team'
-    },
-    {
-      title: 'Full Stack Developer - BiruhKids Pediatric Clinic',
-      subtitle: 'Freelance Team Project',
-      status: 'Backend, UI/UX & Frontend Developer',
-      description: 'Developed a comprehensive digital healthcare platform for BiruhKids Pediatric Clinic in Addis Ababa. Handled backend development, UI/UX design, and frontend implementation.',
-      type: 'team'
-    },
-    {
-      title: 'Full Stack Developer - Bluelight Academy SMS',
-      subtitle: 'Solo Freelance Project',
-      status: 'Complete Development (Solo)',
-      description: 'Built a comprehensive school management system for Bluelight Academy independently. Handled all aspects including UI/UX design, frontend development, backend architecture, and database design.',
-      type: 'solo'
-    },
-    {
-      title: 'Real Estate Website Developer',
-      subtitle: 'Freelance Team Project',
-      status: 'Team Project',
-      description: 'Developed a website for a real estate sales agent as part of a team. Contributed to UI/UX design, frontend development, and backend implementation.',
-      type: 'team'
+  useEffect(() => {
+    fetchExperiences()
+  }, [])
+
+  const fetchExperiences = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/experiences')
+      if (response.ok) {
+        const data = await response.json()
+        setExperiences(data)
+      }
+    } catch (error) {
+      console.error('Error loading experiences:', error)
+    } finally {
+      setLoading(false)
     }
-  ]
+  }
 
   const education = [
     {
@@ -85,6 +74,9 @@ const Experience = () => {
                 transition={{ delay: 0.2, duration: 0.5 }}
                 className="bg-light-card dark:bg-dark-card p-6 rounded-2xl shadow-xl h-full"
               >
+                {loading ? (
+                  <div className="text-center py-12 text-light-textSecondary dark:text-dark-textSecondary">Loading...</div>
+                ) : (
                 <div className="space-y-6">
                   {experiences.map((exp, index) => (
                     <motion.div
@@ -106,10 +98,9 @@ const Experience = () => {
                           <h3 className="text-sm md:text-base font-bold text-light-text dark:text-dark-text mb-1">
                             {exp.title}
                           </h3>
-                          <p className="text-xs text-orange-500 font-semibold mb-1">{exp.subtitle}</p>
-                          <div className="flex items-center space-x-2 text-xs text-light-textSecondary dark:text-dark-textSecondary mb-2">
-                            {exp.type === 'solo' ? <FiUser size={12} /> : <FiUsers size={12} />}
-                            <span>{exp.status}</span>
+                          <p className="text-xs text-orange-500 font-semibold mb-1">{exp.company}</p>
+                          <div className="text-xs text-light-textSecondary dark:text-dark-textSecondary mb-2">
+                            {exp.startDate} - {exp.endDate || 'Present'}
                           </div>
                         </div>
                         <div className="p-1.5 bg-orange-100 dark:bg-orange-900/30 rounded-lg ml-2">
@@ -123,6 +114,7 @@ const Experience = () => {
                     </motion.div>
                   ))}
                 </div>
+                )}
               </motion.div>
             </div>
 

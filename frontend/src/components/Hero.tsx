@@ -38,7 +38,7 @@ const Hero = () => {
                 <img 
                   src="/images/ela.png" 
                   alt="Elyas Yenealem" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-center"
                 />
               </div>
             </motion.div>

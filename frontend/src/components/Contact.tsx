@@ -14,15 +14,11 @@ const Contact = () => {
     e.preventDefault()
     setIsSubmitting(true)
 
-    const BOT_TOKEN = '7622120987:AAECTaQR0ZoWfOAxLbW6SeKtWJjeiuf2Afk'
-    const CHAT_ID = '2120123278'
-    const text = `🔔 New Contact Form Submission\n\n👤 Name: ${formData.name}\n📧 Email: ${formData.email}\n💬 Message:\n${formData.message}`
-
     try {
-      const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+      const response = await fetch('http://localhost:5000/api/contacts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: 'HTML' })
+        body: JSON.stringify(formData)
       })
 
       if (response.ok) {
