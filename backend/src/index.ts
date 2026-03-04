@@ -49,6 +49,10 @@ app.use('/api/experiences', experienceRoutes);
 app.use('/api/testimonials', testimonialRoutes);
 app.use('/api/upload', uploadRoutes);
 
+app.get('/', (req, res) => {
+  res.json({ message: 'Portfolio Backend API', status: 'running' });
+});
+
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
 });
