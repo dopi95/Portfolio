@@ -3,6 +3,7 @@ import { useInView } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
 import { FiBriefcase, FiBook } from 'react-icons/fi'
 import GitHubStats from './GitHubStats'
+import { API_BASE_URL } from '../config'
 
 const Experience = () => {
   const ref = useRef(null)
@@ -16,7 +17,7 @@ const Experience = () => {
 
   const fetchExperiences = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/experiences')
+      const response = await fetch(`${API_BASE_URL}/api/experiences`)
       if (response.ok) {
         const data = await response.json()
         setExperiences(data)

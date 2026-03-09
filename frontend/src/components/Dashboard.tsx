@@ -6,6 +6,7 @@ import Profile from './Profile'
 import Contacts from './Contacts'
 import ContentManager from './ContentManager'
 import TestimonialManager from './TestimonialManager'
+import { API_BASE_URL } from '../config'
 
 interface DashboardProps {
   onLogout: () => void
@@ -41,7 +42,7 @@ const Dashboard = ({ onLogout }: DashboardProps) => {
 
     try {
       // Fetch user profile
-      const profileRes = await fetch('http://localhost:5000/api/profile', {
+      const profileRes = await fetch(`${API_BASE_URL}/api/profile`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       if (profileRes.ok) {
@@ -53,7 +54,7 @@ const Dashboard = ({ onLogout }: DashboardProps) => {
       }
 
       // Fetch contacts
-      const contactsRes = await fetch('http://localhost:5000/api/contacts', {
+      const contactsRes = await fetch(`${API_BASE_URL}/api/contacts`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       if (contactsRes.ok) {
@@ -62,19 +63,19 @@ const Dashboard = ({ onLogout }: DashboardProps) => {
         const unreadCount = contactsData.filter((c: any) => !c.read).length
 
         // Fetch projects
-        const projectsRes = await fetch('http://localhost:5000/api/projects')
+        const projectsRes = await fetch(`${API_BASE_URL}/api/projects`)
         const projectsData = projectsRes.ok ? await projectsRes.json() : []
 
         // Fetch skills
-        const skillsRes = await fetch('http://localhost:5000/api/skills')
+        const skillsRes = await fetch(`${API_BASE_URL}/api/skills`)
         const skillsData = skillsRes.ok ? await skillsRes.json() : []
 
         // Fetch experiences
-        const experiencesRes = await fetch('http://localhost:5000/api/experiences')
+        const experiencesRes = await fetch(`${API_BASE_URL}/api/experiences`)
         const experiencesData = experiencesRes.ok ? await experiencesRes.json() : []
 
         // Fetch testimonials
-        const testimonialsRes = await fetch('http://localhost:5000/api/testimonials/admin/all', {
+        const testimonialsRes = await fetch(`${API_BASE_URL}/api/testimonials/admin/all`, {
           headers: { 'Authorization': `Bearer ${token}` }
         })
         const testimonialsData = testimonialsRes.ok ? await testimonialsRes.json() : []

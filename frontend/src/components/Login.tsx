@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { FiMail, FiLock, FiEye, FiEyeOff, FiHome } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
 import ForgotPassword from './ForgotPassword'
+import { API_BASE_URL } from '../config'
 
 interface LoginProps {
   onLogin: (token: string) => void
@@ -23,7 +24,7 @@ const Login = ({ onLogin }: LoginProps) => {
     setError('')
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/login', {
+      const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

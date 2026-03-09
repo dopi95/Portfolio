@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from 'react'
 import { FaReact, FaNodeJs, FaDocker, FaGitAlt, FaAws, FaHtml5, FaCss3Alt, FaPhp, FaJava, FaPython } from 'react-icons/fa'
 import { SiTypescript, SiNextdotjs, SiTailwindcss, SiExpress, SiMongodb, SiPostgresql, SiMysql, SiVercel, SiNetlify, SiRender, SiJavascript, SiCplusplus } from 'react-icons/si'
 import { VscCode } from 'react-icons/vsc'
+import { API_BASE_URL } from '../config'
 
 const iconMap: any = {
   FaReact, FaNodeJs, FaDocker, FaGitAlt, FaAws, FaHtml5, FaCss3Alt, FaPhp, FaJava, FaPython,
@@ -23,7 +24,7 @@ const Skills = () => {
 
   const fetchSkills = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/skills')
+      const response = await fetch(`${API_BASE_URL}/api/skills`)
       if (response.ok) {
         const data = await response.json()
         setSkills(data)

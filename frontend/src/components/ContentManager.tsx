@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { FiPlus, FiEdit2, FiTrash2, FiSave, FiX } from 'react-icons/fi'
+import { API_BASE_URL } from '../config'
 
 const ContentManager = () => {
   const [activeSection, setActiveSection] = useState('skills')
@@ -18,7 +19,7 @@ const ContentManager = () => {
   const fetchItems = async () => {
     setLoading(true)
     try {
-      const response = await fetch(`http://localhost:5000/api/${activeSection}`)
+      const response = await fetch(`${API_BASE_URL}/api/${activeSection}`)
       if (response.ok) {
         const data = await response.json()
         setItems(data)
@@ -33,8 +34,8 @@ const ContentManager = () => {
   const handleSave = async (formData: any) => {
     const token = localStorage.getItem('token')
     const url = editItem 
-      ? `http://localhost:5000/api/${activeSection}/${editItem._id}`
-      : `http://localhost:5000/api/${activeSection}`
+      ? `${API_BASE_URL}/api/${activeSection}/${editItem._id}`
+      : `${API_BASE_URL}/api/${activeSection}`
     
     try {
       const response = await fetch(url, {
@@ -64,7 +65,7 @@ const ContentManager = () => {
     
     const token = localStorage.getItem('token')
     try {
-      await fetch(`http://localhost:5000/api/${activeSection}/${id}`, {
+      await fetch(`${API_BASE_URL}/api/${activeSection}/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       })
@@ -212,7 +213,7 @@ const FormModal = ({ section, item, onSave, onClose }: any) => {
 
     try {
       const token = localStorage.getItem('token')
-      const response = await fetch('http://localhost:5000/api/upload/image', {
+      const response = await fetch(`${API_BASE_URL}/api/upload/image`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` },
         body: formDataUpload

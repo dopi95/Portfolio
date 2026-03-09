@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { FiMail, FiPhone, FiMapPin, FiSend, FiGithub, FiLinkedin, FiInstagram, FiCheckCircle } from 'react-icons/fi'
+import { API_BASE_URL } from '../config'
 
 const Contact = () => {
   const ref = useRef(null)
@@ -15,7 +16,7 @@ const Contact = () => {
     setIsSubmitting(true)
 
     try {
-      const response = await fetch('http://localhost:5000/api/contacts', {
+      const response = await fetch(`${API_BASE_URL}/api/contacts`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)

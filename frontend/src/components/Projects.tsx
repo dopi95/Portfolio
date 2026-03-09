@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
 import { FiExternalLink, FiGithub, FiCode } from 'react-icons/fi'
+import { API_BASE_URL } from '../config'
 
 const Projects = () => {
   const ref = useRef(null)
@@ -15,7 +16,7 @@ const Projects = () => {
 
   const fetchProjects = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/projects')
+      const response = await fetch(`${API_BASE_URL}/api/projects`)
       if (response.ok) {
         const data = await response.json()
         setProjects(data)
@@ -79,7 +80,7 @@ const Projects = () => {
                 </p>
                 
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech) => (
+                  {project.technologies.map((tech: string) => (
                     <span 
                       key={tech} 
                       className="px-2 py-1 bg-orange-100 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 text-xs rounded-full"

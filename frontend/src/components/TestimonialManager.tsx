@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { FiPlus, FiEdit2, FiTrash2, FiSave, FiX, FiStar } from 'react-icons/fi'
+import { API_BASE_URL } from '../config'
 
 const TestimonialManager = () => {
   const [testimonials, setTestimonials] = useState<any[]>([])
@@ -18,7 +19,7 @@ const TestimonialManager = () => {
     setLoading(true)
     try {
       const token = localStorage.getItem('token')
-      const response = await fetch('http://localhost:5000/api/testimonials/admin/all', {
+      const response = await fetch(`${API_BASE_URL}/api/testimonials/admin/all`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       if (response.ok) {
@@ -35,8 +36,8 @@ const TestimonialManager = () => {
   const handleSave = async (formData: any) => {
     const token = localStorage.getItem('token')
     const url = editItem 
-      ? `http://localhost:5000/api/testimonials/${editItem._id}`
-      : 'http://localhost:5000/api/testimonials'
+      ? `${API_BASE_URL}/api/testimonials/${editItem._id}`
+      : `${API_BASE_URL}/api/testimonials`
     
     try {
       const response = await fetch(url, {
@@ -67,7 +68,7 @@ const TestimonialManager = () => {
     
     const token = localStorage.getItem('token')
     try {
-      await fetch(`http://localhost:5000/api/testimonials/${id}`, {
+      await fetch(`${API_BASE_URL}/api/testimonials/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       })
@@ -82,7 +83,7 @@ const TestimonialManager = () => {
   const handleStatusChange = async (id: string, status: string) => {
     const token = localStorage.getItem('token')
     try {
-      await fetch(`http://localhost:5000/api/testimonials/${id}/status`, {
+      await fetch(`${API_BASE_URL}/api/testimonials/${id}/status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -247,7 +248,7 @@ const TestimonialForm = ({ item, onSave, onClose }: any) => {
 
     try {
       const token = localStorage.getItem('token')
-      const response = await fetch('http://localhost:5000/api/upload/image', {
+      const response = await fetch(`${API_BASE_URL}/api/upload/image`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` },
         body: formDataUpload
@@ -390,3 +391,5 @@ const TestimonialForm = ({ item, onSave, onClose }: any) => {
 }
 
 export default TestimonialManager
+
+

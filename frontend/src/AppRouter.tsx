@@ -4,6 +4,7 @@ import App from './App'
 import Login from './components/Login'
 import Dashboard from './components/Dashboard'
 import NotFound from './components/NotFound'
+import { API_BASE_URL } from './config'
 
 const AppRouter = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -13,7 +14,7 @@ const AppRouter = () => {
     const token = localStorage.getItem('token')
     if (token) {
       // Verify token
-      fetch('http://localhost:5000/api/auth/verify', {
+      fetch(`${API_BASE_URL}/api/auth/verify`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

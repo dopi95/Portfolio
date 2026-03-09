@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { FiMail, FiLock, FiArrowLeft } from 'react-icons/fi'
+import { API_BASE_URL } from '../config'
 
 interface ForgotPasswordProps {
   onBack: () => void
@@ -23,7 +24,7 @@ const ForgotPassword = ({ onBack }: ForgotPasswordProps) => {
     setMessage('')
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/forgot-password', {
+      const response = await fetch(`${API_BASE_URL}/api/auth/forgot-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })
@@ -62,7 +63,7 @@ const ForgotPassword = ({ onBack }: ForgotPasswordProps) => {
     setLoading(true)
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/reset-password', {
+      const response = await fetch(`${API_BASE_URL}/api/auth/reset-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, otp, newPassword })

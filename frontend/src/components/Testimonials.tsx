@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from 'react'
 import { FiStar, FiX } from 'react-icons/fi'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Pagination } from 'swiper/modules'
+import { API_BASE_URL } from '../config'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
@@ -21,7 +22,7 @@ const Testimonials = () => {
 
   const fetchTestimonials = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/testimonials')
+      const response = await fetch(`${API_BASE_URL}/api/testimonials`)
       if (response.ok) {
         const data = await response.json()
         setTestimonials(data)
@@ -169,7 +170,7 @@ const TestimonialSubmitForm = ({ onClose }: any) => {
     formDataUpload.append('file', file)
 
     try {
-      const response = await fetch('http://localhost:5000/api/upload/public', {
+      const response = await fetch(`${API_BASE_URL}/api/upload/public`, {
         method: 'POST',
         body: formDataUpload
       })
@@ -190,7 +191,7 @@ const TestimonialSubmitForm = ({ onClose }: any) => {
     setSubmitting(true)
 
     try {
-      const response = await fetch('http://localhost:5000/api/testimonials/submit', {
+      const response = await fetch(`${API_BASE_URL}/api/testimonials/submit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -307,3 +308,6 @@ const TestimonialSubmitForm = ({ onClose }: any) => {
 }
 
 export default Testimonials
+
+
+

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { FiUser, FiMail, FiLock, FiSave, FiX } from 'react-icons/fi'
+import { API_BASE_URL } from '../config'
 
 const Profile = () => {
   const [user, setUser] = useState<any>(null)
@@ -25,7 +26,7 @@ const Profile = () => {
   const fetchProfile = async () => {
     try {
       const token = localStorage.getItem('token')
-      const response = await fetch('http://localhost:5000/api/profile', {
+      const response = await fetch(`${API_BASE_URL}/api/profile`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -51,7 +52,7 @@ const Profile = () => {
 
     try {
       const token = localStorage.getItem('token')
-      const response = await fetch('http://localhost:5000/api/profile', {
+      const response = await fetch(`${API_BASE_URL}/api/profile`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -91,7 +92,7 @@ const Profile = () => {
 
     try {
       const token = localStorage.getItem('token')
-      const response = await fetch('http://localhost:5000/api/profile/password', {
+      const response = await fetch(`${API_BASE_URL}/api/profile/password`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

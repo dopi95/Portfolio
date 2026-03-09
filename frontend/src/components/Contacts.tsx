@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { FiMail, FiUser, FiClock, FiSend, FiTrash2, FiCheck, FiX } from 'react-icons/fi'
+import { API_BASE_URL } from '../config'
 
 const Contacts = () => {
   const [contacts, setContacts] = useState<any[]>([])
@@ -18,7 +19,7 @@ const Contacts = () => {
   const fetchContacts = async () => {
     try {
       const token = localStorage.getItem('token')
-      const response = await fetch('http://localhost:5000/api/contacts', {
+      const response = await fetch(`${API_BASE_URL}/api/contacts`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       
@@ -36,7 +37,7 @@ const Contacts = () => {
   const markAsRead = async (id: string) => {
     try {
       const token = localStorage.getItem('token')
-      await fetch(`http://localhost:5000/api/contacts/${id}/read`, {
+      await fetch(`${API_BASE_URL}/api/contacts/${id}/read`, {
         method: 'PUT',
         headers: { 'Authorization': `Bearer ${token}` }
       })
@@ -54,7 +55,7 @@ const Contacts = () => {
 
     try {
       const token = localStorage.getItem('token')
-      const response = await fetch(`http://localhost:5000/api/contacts/${selectedContact._id}/reply`, {
+      const response = await fetch(`${API_BASE_URL}/api/contacts/${selectedContact._id}/reply`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -83,7 +84,7 @@ const Contacts = () => {
 
     try {
       const token = localStorage.getItem('token')
-      await fetch(`http://localhost:5000/api/contacts/${id}`, {
+      await fetch(`${API_BASE_URL}/api/contacts/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       })
