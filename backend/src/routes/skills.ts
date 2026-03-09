@@ -18,7 +18,7 @@ const verifyToken = (req: any, res: any, next: any) => {
 // Get all skills (public)
 router.get('/', async (req, res) => {
   try {
-    const skills = await Skill.find().sort({ order: 1 });
+    const skills = await Skill.find().sort({ order: 1 }).lean();
     res.json(skills);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching skills' });

@@ -31,4 +31,6 @@ const experienceSchema = new mongoose.Schema({
   timestamps: true
 });
 
+experienceSchema.index({ order: 1 });
+
 export default mongoose.model('Experience', experienceSchema);

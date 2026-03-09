@@ -18,7 +18,7 @@ const verifyToken = (req: any, res: any, next: any) => {
 // Get all experiences (public)
 router.get('/', async (req, res) => {
   try {
-    const experiences = await Experience.find().sort({ order: 1 });
+    const experiences = await Experience.find().sort({ order: 1 }).lean();
     res.json(experiences);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching experiences' });

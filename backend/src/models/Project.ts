@@ -30,4 +30,6 @@ const projectSchema = new mongoose.Schema({
   timestamps: true
 });
 
+projectSchema.index({ order: 1 });
+
 export default mongoose.model('Project', projectSchema);

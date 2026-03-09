@@ -18,7 +18,7 @@ const verifyToken = (req: any, res: any, next: any) => {
 // Get all projects (public)
 router.get('/', async (req, res) => {
   try {
-    const projects = await Project.find().sort({ order: 1 });
+    const projects = await Project.find().sort({ order: 1 }).lean();
     res.json(projects);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching projects' });
