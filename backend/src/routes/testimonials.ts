@@ -4,6 +4,11 @@ import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
+// Simple in-memory cache
+let testimonialsCache: any = null;
+let cacheTimestamp = 0;
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+
 const verifyToken = (req: any, res: any, next: any) => {
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) return res.status(401).json({ message: 'No token provided' });
@@ -18,9 +23,31 @@ const verifyToken = (req: any, res: any, next: any) => {
 // Get all testimonials (public - only approved)
 router.get('/', async (req, res) => {
   try {
-    const testimonials = await Testimonial.find({ status: 'approved' }).sort({ order: 1 }).lean();
+    const now = Date.now();
+    
+    // Return cached data if available and fresh
+    if (testimonialsCache && (now - cacheTimestamp) < CACHE_DURATION) {
+      res.setHeader('X-Cache', 'HIT');
+      res.setHeader('Cache-Control', 'public, max-age=300');
+      return res.json(testimonialsCache);
+    }
+    
+    // Fetch from database
+    const testimonials = await Testimonial.find({ status: 'approved' })
+      .select('name position message rating avatar photo order')
+      .sort({ order: 1 })
+      .limit(20)
+      .lean();
+    
+    // Update cache
+    testimonialsCache = testimonials;
+    cacheTimestamp = now;
+    
+    res.setHeader('X-Cache', 'MISS');
+    res.setHeader('Cache-Control', 'public, max-age=300');
     res.json(testimonials);
   } catch (error) {
+    console.error('Error fetching testimonials:', error);
     res.status(500).json({ message: 'Error fetching testimonials' });
   }
 });
@@ -51,6 +78,7 @@ router.post('/', verifyToken, async (req, res) => {
   try {
     const testimonial = new Testimonial(req.body);
     await testimonial.save();
+    testimonialsCache = null; // Invalidate cache
     res.json(testimonial);
   } catch (error) {
     res.status(500).json({ message: 'Error creating testimonial' });
@@ -66,6 +94,7 @@ router.patch('/:id/status', verifyToken, async (req, res) => {
       { status },
       { new: true }
     );
+    testimonialsCache = null; // Invalidate cache
     res.json(testimonial);
   } catch (error) {
     res.status(500).json({ message: 'Error updating status' });
@@ -76,6 +105,7 @@ router.patch('/:id/status', verifyToken, async (req, res) => {
 router.put('/:id', verifyToken, async (req, res) => {
   try {
     const testimonial = await Testimonial.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    testimonialsCache = null; // Invalidate cache
     res.json(testimonial);
   } catch (error) {
     res.status(500).json({ message: 'Error updating testimonial' });
@@ -86,6 +116,7 @@ router.put('/:id', verifyToken, async (req, res) => {
 router.delete('/:id', verifyToken, async (req, res) => {
   try {
     await Testimonial.findByIdAndDelete(req.params.id);
+    testimonialsCache = null; // Invalidate cache
     res.json({ message: 'Testimonial deleted' });
   } catch (error) {
     res.status(500).json({ message: 'Error deleting testimonial' });

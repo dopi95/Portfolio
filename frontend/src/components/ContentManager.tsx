@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { FiPlus, FiEdit2, FiTrash2, FiSave, FiX } from 'react-icons/fi'
+import { FiPlus, FiEdit2, FiTrash2, FiSave, FiX, FiArrowUp, FiArrowDown } from 'react-icons/fi'
 import { API_BASE_URL } from '../config'
 
 const ContentManager = () => {
@@ -76,6 +76,35 @@ const ContentManager = () => {
     }
   }
 
+  const handleReorder = async (fromIndex: number, toIndex: number) => {
+    if (toIndex < 0 || toIndex >= items.length) return
+    
+    const newItems = [...items]
+    const [movedItem] = newItems.splice(fromIndex, 1)
+    newItems.splice(toIndex, 0, movedItem)
+    
+    // Update order values
+    const updatedItems = newItems.map((item, idx) => ({ ...item, order: idx + 1 }))
+    setItems(updatedItems)
+    
+    // Save to backend using reorder endpoint
+    const token = localStorage.getItem('token')
+    try {
+      await fetch(`${API_BASE_URL}/api/${activeSection}/reorder`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ items: updatedItems.map(({ _id, order }) => ({ _id, order })) })
+      })
+      setMessage('Order updated successfully')
+    } catch (error) {
+      setError('Error updating order')
+      fetchItems()
+    }
+  }
+
   return (
     <div className="max-w-7xl mx-auto">
       <h2 className="text-2xl sm:text-3xl font-bold text-orange-500 mb-6">Content Manager</h2>
@@ -130,9 +159,32 @@ const ContentManager = () => {
         <div className="text-center py-12">Loading...</div>
       ) : (
         <div className="grid gap-4">
-          {items.map((item) => (
+          {items.map((item, index) => (
             <div key={item._id} className="bg-light-card dark:bg-dark-card rounded-xl p-4 shadow-lg">
-              <div className="flex justify-between items-start">
+              <div className="flex justify-between items-start gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="flex flex-col gap-1">
+                    <button
+                      onClick={() => handleReorder(index, index - 1)}
+                      disabled={index === 0}
+                      className="p-1 bg-gray-500 hover:bg-gray-600 text-white rounded disabled:opacity-30 disabled:cursor-not-allowed"
+                      title="Move up"
+                    >
+                      <FiArrowUp size={14} />
+                    </button>
+                    <button
+                      onClick={() => handleReorder(index, index + 1)}
+                      disabled={index === items.length - 1}
+                      className="p-1 bg-gray-500 hover:bg-gray-600 text-white rounded disabled:opacity-30 disabled:cursor-not-allowed"
+                      title="Move down"
+                    >
+                      <FiArrowDown size={14} />
+                    </button>
+                  </div>
+                  <div className="text-sm font-bold text-orange-500 min-w-[30px]">
+                    #{item.order || index + 1}
+                  </div>
+                </div>
                 <div className="flex-1">
                   {activeSection === 'skills' && (
                     <>
@@ -297,6 +349,13 @@ const FormModal = ({ section, item, onSave, onClose }: any) => {
                 className="w-full px-4 py-2 bg-light-cardHover dark:bg-dark-cardHover border border-light-border dark:border-dark-border rounded-lg text-light-text dark:text-dark-text"
                 required
               />
+              <input
+                type="number"
+                placeholder="Display Order (optional)"
+                value={formData.order || ''}
+                onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) || 0 })}
+                className="w-full px-4 py-2 bg-light-cardHover dark:bg-dark-cardHover border border-light-border dark:border-dark-border rounded-lg text-light-text dark:text-dark-text"
+              />
             </>
           )}
 
@@ -317,6 +376,13 @@ const FormModal = ({ section, item, onSave, onClose }: any) => {
                 className="w-full px-4 py-2 bg-light-cardHover dark:bg-dark-cardHover border border-light-border dark:border-dark-border rounded-lg text-light-text dark:text-dark-text"
                 rows={3}
                 required
+              />
+              <input
+                type="number"
+                placeholder="Display Order (optional)"
+                value={formData.order || ''}
+                onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) || 0 })}
+                className="w-full px-4 py-2 bg-light-cardHover dark:bg-dark-cardHover border border-light-border dark:border-dark-border rounded-lg text-light-text dark:text-dark-text"
               />
               <div>
                 <label className="block text-sm font-medium text-light-text dark:text-dark-text mb-2">Project Image</label>
@@ -406,6 +472,13 @@ const FormModal = ({ section, item, onSave, onClose }: any) => {
                 className="w-full px-4 py-2 bg-light-cardHover dark:bg-dark-cardHover border border-light-border dark:border-dark-border rounded-lg text-light-text dark:text-dark-text"
                 rows={3}
                 required
+              />
+              <input
+                type="number"
+                placeholder="Display Order (optional)"
+                value={formData.order || ''}
+                onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) || 0 })}
+                className="w-full px-4 py-2 bg-light-cardHover dark:bg-dark-cardHover border border-light-border dark:border-dark-border rounded-lg text-light-text dark:text-dark-text"
               />
             </>
           )}

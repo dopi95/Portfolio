@@ -22,7 +22,16 @@ const Testimonials = () => {
 
   const fetchTestimonials = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/testimonials`)
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 5000)
+      
+      const response = await fetch(`${API_BASE_URL}/api/testimonials`, {
+        signal: controller.signal,
+        headers: { 'Accept': 'application/json' }
+      })
+      
+      clearTimeout(timeoutId)
+      
       if (response.ok) {
         const data = await response.json()
         setTestimonials(data)
@@ -33,6 +42,26 @@ const Testimonials = () => {
       setLoading(false)
     }
   }
+
+  const TestimonialSkeleton = () => (
+    <div className="bg-light-card dark:bg-dark-card p-6 md:p-8 rounded-xl shadow-lg h-[400px] md:h-[380px] flex flex-col items-center animate-pulse">
+      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-light-cardHover dark:bg-dark-cardHover mb-4" />
+      <div className="flex gap-1 mb-3">
+        {[...Array(5)].map((_, i) => (
+          <div key={i} className="w-4 h-4 bg-light-cardHover dark:bg-dark-cardHover rounded" />
+        ))}
+      </div>
+      <div className="w-full space-y-2 mb-4 flex-1">
+        <div className="h-3 bg-light-cardHover dark:bg-dark-cardHover rounded w-full" />
+        <div className="h-3 bg-light-cardHover dark:bg-dark-cardHover rounded w-5/6" />
+        <div className="h-3 bg-light-cardHover dark:bg-dark-cardHover rounded w-4/6" />
+      </div>
+      <div className="text-center w-full">
+        <div className="h-4 bg-light-cardHover dark:bg-dark-cardHover rounded w-32 mx-auto mb-2" />
+        <div className="h-3 bg-light-cardHover dark:bg-dark-cardHover rounded w-24 mx-auto" />
+      </div>
+    </div>
+  )
 
   const TestimonialCard = ({ testimonial, index }: any) => (
     <motion.div
@@ -45,6 +74,8 @@ const Testimonials = () => {
         <img 
           src={testimonial.photo} 
           alt={testimonial.name}
+          loading="lazy"
+          decoding="async"
           className="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover mb-4"
         />
       ) : (
@@ -86,7 +117,14 @@ const Testimonials = () => {
           </div>
           
           {loading ? (
-            <div className="text-center py-12 text-light-textSecondary dark:text-dark-textSecondary">Loading...</div>
+            <>
+              <div className="hidden md:grid md:grid-cols-2 gap-6">
+                {[...Array(4)].map((_, i) => <TestimonialSkeleton key={i} />)}
+              </div>
+              <div className="md:hidden">
+                <TestimonialSkeleton />
+              </div>
+            </>
           ) : testimonials.length === 0 ? (
             <div className="text-center py-12 text-light-textSecondary dark:text-dark-textSecondary">No testimonials yet</div>
           ) : (

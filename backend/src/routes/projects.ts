@@ -18,9 +18,10 @@ const verifyToken = (req: any, res: any, next: any) => {
 // Get all projects (public)
 router.get('/', async (req, res) => {
   try {
-    const projects = await Project.find().sort({ order: 1 }).lean();
+    const projects = await Project.find().sort({ order: 1, createdAt: 1 }).lean();
     res.json(projects);
   } catch (error) {
+    console.error('Error fetching projects:', error);
     res.status(500).json({ message: 'Error fetching projects' });
   }
 });
@@ -28,10 +29,15 @@ router.get('/', async (req, res) => {
 // Create project (protected)
 router.post('/', verifyToken, async (req, res) => {
   try {
-    const project = new Project(req.body);
+    // Auto-increment order: get the highest order and add 1
+    const lastProject = await Project.findOne().sort({ order: -1 }).select('order').lean();
+    const nextOrder = lastProject ? (lastProject.order || 0) + 1 : 1;
+    
+    const project = new Project({ ...req.body, order: nextOrder });
     await project.save();
     res.json(project);
   } catch (error) {
+    console.error('Error creating project:', error);
     res.status(500).json({ message: 'Error creating project' });
   }
 });
@@ -53,6 +59,21 @@ router.delete('/:id', verifyToken, async (req, res) => {
     res.json({ message: 'Project deleted' });
   } catch (error) {
     res.status(500).json({ message: 'Error deleting project' });
+  }
+});
+
+// Reorder projects (protected)
+router.post('/reorder', verifyToken, async (req, res) => {
+  try {
+    const { items } = req.body;
+    await Promise.all(
+      items.map((item: any) =>
+        Project.findByIdAndUpdate(item._id, { order: item.order })
+      )
+    );
+    res.json({ message: 'Order updated' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating order' });
   }
 });
 

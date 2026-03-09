@@ -18,9 +18,10 @@ const verifyToken = (req: any, res: any, next: any) => {
 // Get all experiences (public)
 router.get('/', async (req, res) => {
   try {
-    const experiences = await Experience.find().sort({ order: 1 }).lean();
+    const experiences = await Experience.find().sort({ order: 1, startDate: -1 }).lean();
     res.json(experiences);
   } catch (error) {
+    console.error('Error fetching experiences:', error);
     res.status(500).json({ message: 'Error fetching experiences' });
   }
 });
@@ -28,10 +29,14 @@ router.get('/', async (req, res) => {
 // Create experience (protected)
 router.post('/', verifyToken, async (req, res) => {
   try {
-    const experience = new Experience(req.body);
+    const lastExperience = await Experience.findOne().sort({ order: -1 }).select('order').lean();
+    const nextOrder = lastExperience ? (lastExperience.order || 0) + 1 : 1;
+    
+    const experience = new Experience({ ...req.body, order: nextOrder });
     await experience.save();
     res.json(experience);
   } catch (error) {
+    console.error('Error creating experience:', error);
     res.status(500).json({ message: 'Error creating experience' });
   }
 });
@@ -53,6 +58,21 @@ router.delete('/:id', verifyToken, async (req, res) => {
     res.json({ message: 'Experience deleted' });
   } catch (error) {
     res.status(500).json({ message: 'Error deleting experience' });
+  }
+});
+
+// Reorder experiences (protected)
+router.post('/reorder', verifyToken, async (req, res) => {
+  try {
+    const { items } = req.body;
+    await Promise.all(
+      items.map((item: any) =>
+        Experience.findByIdAndUpdate(item._id, { order: item.order })
+      )
+    );
+    res.json({ message: 'Order updated' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating order' });
   }
 });
 
