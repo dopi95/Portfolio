@@ -50,7 +50,7 @@ const Education = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="bg-light-card dark:bg-dark-card p-6 md:p-8 rounded-2xl shadow-xl"
+            className="bg-light-card dark:bg-dark-card md:bg-transparent md:dark:bg-transparent p-6 md:p-0 rounded-2xl shadow-xl md:shadow-none"
           >
             <div className="space-y-8">
               {education.map((edu, index) => (
@@ -66,7 +66,7 @@ const Education = () => {
                     initial={{ scale: 0 }}
                     animate={isInView ? { scale: 1 } : {}}
                     transition={{ delay: 0.4 + index * 0.15 }}
-                    className="absolute -left-3 top-0 w-6 h-6 bg-orange-500 rounded-full border-4 border-light-card dark:border-dark-card"
+                    className="absolute -left-3 top-0 w-6 h-6 bg-orange-500 rounded-full border-4 border-light-card dark:border-dark-card md:border-light-bg md:dark:border-dark-bg"
                   />
                   
                   <div className="flex items-start justify-between mb-2">

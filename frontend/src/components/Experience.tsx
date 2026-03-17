@@ -73,7 +73,7 @@ const Experience = () => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 0.2, duration: 0.5 }}
-                className="bg-light-card dark:bg-dark-card p-6 rounded-2xl shadow-xl h-full"
+                className="p-6 rounded-2xl shadow-xl h-full bg-light-card dark:bg-dark-card lg:bg-transparent lg:dark:bg-transparent lg:shadow-none lg:p-0"
               >
                 {loading ? (
                   <div className="text-center py-12 text-light-textSecondary dark:text-dark-textSecondary">Loading...</div>
@@ -91,7 +91,7 @@ const Experience = () => {
                         initial={{ scale: 0 }}
                         animate={isInView ? { scale: 1 } : {}}
                         transition={{ delay: 0.4 + index * 0.1 }}
-                        className="absolute -left-2.5 top-0 w-5 h-5 bg-orange-500 rounded-full border-4 border-light-card dark:border-dark-card"
+                        className="absolute -left-2.5 top-0 w-5 h-5 bg-orange-500 rounded-full border-4 border-light-card dark:border-dark-card lg:border-light-cardHover lg:dark:border-dark-cardHover"
                       />
                       
                       <div className="flex items-start justify-between mb-2">
@@ -129,7 +129,7 @@ const Experience = () => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 0.2, duration: 0.5 }}
-                className="bg-light-card dark:bg-dark-card p-6 rounded-2xl shadow-xl h-full"
+                className="p-6 rounded-2xl shadow-xl h-full bg-light-card dark:bg-dark-card lg:bg-transparent lg:dark:bg-transparent lg:shadow-none lg:p-0"
               >
                 <div className="space-y-6">
                   {education.map((edu, index) => (
@@ -144,7 +144,7 @@ const Experience = () => {
                         initial={{ scale: 0 }}
                         animate={isInView ? { scale: 1 } : {}}
                         transition={{ delay: 0.4 + index * 0.1 }}
-                        className="absolute -left-2.5 top-0 w-5 h-5 bg-orange-500 rounded-full border-4 border-light-card dark:border-dark-card"
+                        className="absolute -left-2.5 top-0 w-5 h-5 bg-orange-500 rounded-full border-4 border-light-card dark:border-dark-card lg:border-light-cardHover lg:dark:border-dark-cardHover"
                       />
                       
                       <div className="flex items-start justify-between mb-2">
