@@ -65,19 +65,35 @@ const About = () => {
               className="space-y-4"
             >
               <p className="text-base md:text-lg text-light-textSecondary dark:text-dark-textSecondary leading-relaxed">
-                I'm a <span className="font-bold text-orange-500">software developer</span> based in Ethiopia, specializing in <span className="font-bold text-orange-500">full-stack web development</span>. I create scalable applications using modern technologies including React, TypeScript, Next.js, Node.js, Express, MongoDB, PostgreSQL, and TailwindCSS.
+                I'm a passionate <span className="font-bold text-orange-500">Full-Stack Software Developer</span> based in Ethiopia, specializing in building <span className="font-bold text-orange-500">scalable, high-performance web and mobile applications</span>. I work with modern technologies such as React, TypeScript, Next.js, Node.js, Express, MongoDB, PostgreSQL, TailwindCSS, and React Native.
               </p>
-              
+
               <p className="text-base md:text-lg text-light-textSecondary dark:text-dark-textSecondary leading-relaxed">
-                My expertise spans across <span className="font-bold text-orange-500">modern frameworks and technologies</span>, from building responsive frontends with React and Vite to developing robust backends with Node.js and Express. I'm passionate about creating <span className="font-bold text-orange-500">clean, scalable, and user-centric</span> digital solutions.
+                I focus on creating <span className="font-bold text-orange-500">clean, efficient, and user-centered solutions</span>, combining strong frontend design with robust backend architecture. From responsive interfaces using React and Vite to scalable server-side systems, I aim to deliver products that are both <span className="font-bold text-orange-500">functional and impactful</span>.
               </p>
-              
+
               <p className="text-base md:text-lg text-light-textSecondary dark:text-dark-textSecondary leading-relaxed">
-                I've successfully delivered <span className="font-bold text-orange-500">freelance projects</span> including healthcare platforms, school management systems, and real estate websites, working both independently and in collaborative teams to bring innovative solutions to life.
+                I have successfully delivered multiple <span className="font-bold text-orange-500">freelance and collaborative projects</span>, including healthcare platforms, school management systems, and real estate applications — always ensuring quality, performance, and a great user experience.
               </p>
-              
+
+              {/* Awra Tech */}
+              <div>
+                <h3 className="text-base md:text-lg font-bold text-orange-500 mb-2">Founder of Awra Tech</h3>
+                <p className="text-sm md:text-base text-light-textSecondary dark:text-dark-textSecondary leading-relaxed">
+                  In 2023, I founded <span className="font-bold text-orange-500">Awra Tech</span>, a software development company focused on building real-world digital solutions that solve practical problems. We work both independently and as a team, delivering modern, scalable products using technologies like Next.js, TypeScript, Node.js, and React Native.
+                </p>
+                <a
+                  href="https://awratech.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block text-sm font-semibold text-orange-500 hover:underline mt-1"
+                >
+                  Explore more at: awratech.com →
+                </a>
+              </div>
+
               <p className="text-base md:text-lg text-light-textSecondary dark:text-dark-textSecondary leading-relaxed">
-                I'm currently open to <span className="font-bold text-orange-500">freelance projects or full-time roles</span> where I can grow and contribute with purpose. Feel free to explore my work or reach out — I'm always ready for a <span className="font-bold text-orange-500">meaningful challenge</span>!
+                I'm currently open to <span className="font-bold text-orange-500">freelance opportunities and full-time roles</span> where I can contribute, grow, and take on meaningful challenges. If you're looking for someone dedicated to building high-quality digital solutions, feel free to <span className="font-bold text-orange-500">reach out</span>.
               </p>
 
               {/* Motto */}
