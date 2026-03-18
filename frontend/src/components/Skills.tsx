@@ -1,15 +1,25 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
-import { FaReact, FaNodeJs, FaDocker, FaGitAlt, FaAws, FaHtml5, FaCss3Alt, FaPhp, FaJava, FaPython } from 'react-icons/fa'
-import { SiTypescript, SiNextdotjs, SiTailwindcss, SiExpress, SiMongodb, SiPostgresql, SiMysql, SiVercel, SiNetlify, SiRender, SiJavascript, SiCplusplus } from 'react-icons/si'
+import { FaReact, FaNodeJs, FaDocker, FaGitAlt, FaAws, FaHtml5, FaCss3Alt, FaPhp, FaJava, FaPython, FaFigma, FaLinux, FaApple, FaAngular, FaVuejs, FaDatabase, FaCode } from 'react-icons/fa'
+import { SiTypescript, SiNextdotjs, SiTailwindcss, SiExpress, SiMongodb, SiPostgresql, SiMysql, SiVercel, SiNetlify, SiRender, SiJavascript, SiCplusplus, SiRedis, SiGraphql, SiFirebase, SiSupabase, SiPrisma, SiDjango, SiFlask, SiSpring, SiKubernetes, SiTerraform, SiNginx, SiElasticsearch, SiRedux, SiSvelte, SiNuxtdotjs, SiAstro, SiVite, SiWebpack, SiJest, SiPostman, SiFigma, SiBlender, SiUnity, SiAndroid, SiFlutter, SiKotlin, SiGo, SiRuby, SiScala, SiLua, SiSolidity, SiPytorch, SiTensorflow, SiJupyter, SiGithub, SiGitlab, SiJira, SiSlack, SiNotion, SiGooglecloud, SiCloudflare, SiDigitalocean, SiHeroku, SiStripe, SiWordpress, SiShopify, SiContentful, SiSanity, SiStrapi, SiAppwrite } from 'react-icons/si'
 import { VscCode } from 'react-icons/vsc'
+import { BiCodeAlt } from 'react-icons/bi'
 import { API_BASE_URL } from '../config'
 
 const iconMap: any = {
   FaReact, FaNodeJs, FaDocker, FaGitAlt, FaAws, FaHtml5, FaCss3Alt, FaPhp, FaJava, FaPython,
+  FaFigma, FaLinux, FaApple, FaAngular, FaVuejs, FaDatabase, FaCode,
   SiTypescript, SiNextdotjs, SiTailwindcss, SiExpress, SiMongodb, SiPostgresql, SiMysql,
-  SiVercel, SiNetlify, SiRender, SiJavascript, SiCplusplus, VscCode
+  SiVercel, SiNetlify, SiRender, SiJavascript, SiCplusplus, SiRedis, SiGraphql, SiFirebase,
+  SiSupabase, SiPrisma, SiDjango, SiFlask, SiSpring, SiKubernetes, SiTerraform, SiNginx,
+  SiElasticsearch, SiRedux, SiSvelte, SiNuxtdotjs, SiAstro, SiVite, SiWebpack,
+  SiJest, SiPostman, SiFigma, SiBlender, SiUnity, SiAndroid, SiFlutter, SiKotlin,
+  SiGo, SiRuby, SiScala, SiLua, SiSolidity, SiPytorch, SiTensorflow, SiJupyter,
+  SiGithub, SiGitlab, SiJira, SiSlack, SiNotion, SiGooglecloud, SiCloudflare,
+  SiDigitalocean, SiHeroku, SiStripe, SiWordpress, SiShopify, SiContentful,
+  SiSanity, SiStrapi, SiAppwrite,
+  VscCode, BiCodeAlt
 }
 
 const Skills = () => {
@@ -45,7 +55,7 @@ const Skills = () => {
   }, {})
 
   const CircularProgress = ({ percent, name, icon, color, delay }: { percent: number, name: string, icon: string, color: string, delay: number }) => {
-    const Icon = iconMap[icon] || FaReact
+    const Icon = iconMap[icon] || BiCodeAlt
     const radius = 45
     const circumference = 2 * Math.PI * radius
     const offset = circumference - (percent / 100) * circumference
