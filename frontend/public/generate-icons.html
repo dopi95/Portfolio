@@ -1,49 +1,52 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Generate Icons</title>
-</head>
+<head><title>Generate Icons</title></head>
 <body>
-    <h2>Icon Generator</h2>
-    <p>Click the buttons to download the icons:</p>
-    <button onclick="generateIcon(192)">Download 192x192</button>
-    <button onclick="generateIcon(512)">Download 512x512</button>
-    
-    <script>
-        function generateIcon(size) {
-            const svg = `<svg width="${size}" height="${size}" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#f97316;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#ea580c;stop-opacity:1" />
-    </linearGradient>
-  </defs>
-  <rect width="512" height="512" fill="url(#grad)" rx="100"/>
-  <text x="256" y="370" font-family="Arial, sans-serif" font-size="320" font-weight="bold" fill="#ffffff" text-anchor="middle">E</text>
-</svg>`;
-            
-            const canvas = document.createElement('canvas');
-            canvas.width = size;
-            canvas.height = size;
-            const ctx = canvas.getContext('2d');
-            
-            const img = new Image();
-            const blob = new Blob([svg], { type: 'image/svg+xml' });
-            const url = URL.createObjectURL(blob);
-            
-            img.onload = function() {
-                ctx.drawImage(img, 0, 0, size, size);
-                canvas.toBlob(function(blob) {
-                    const link = document.createElement('a');
-                    link.download = `icon-${size}.png`;
-                    link.href = URL.createObjectURL(blob);
-                    link.click();
-                    URL.revokeObjectURL(url);
-                });
-            };
-            
-            img.src = url;
-        }
-    </script>
+  <h3>Click "Generate" — then save each downloaded file into /public/</h3>
+  <p>Files needed: <code>favicon.ico</code>, <code>icon-16.png</code>, <code>icon-32.png</code>, <code>icon-96.png</code></p>
+  <button onclick="generate()">Generate & Download All</button>
+  <div id="previews" style="display:flex;gap:16px;margin-top:16px;align-items:flex-end"></div>
+
+  <script>
+    function generate() {
+      const img = new Image()
+      img.src = '/icon-192.png'
+      img.onload = () => {
+        const sizes = [16, 32, 96]
+        sizes.forEach(size => {
+          const canvas = document.createElement('canvas')
+          canvas.width = size
+          canvas.height = size
+          canvas.getContext('2d').drawImage(img, 0, 0, size, size)
+          canvas.toBlob(blob => {
+            const a = document.createElement('a')
+            a.href = URL.createObjectURL(blob)
+            a.download = `icon-${size}.png`
+            a.click()
+
+            // preview
+            const preview = document.createElement('div')
+            preview.innerHTML = `<img src="${a.href}" style="image-rendering:pixelated;width:${size}px;height:${size}px;border:1px solid #ccc"><br><small>icon-${size}.png</small>`
+            document.getElementById('previews').appendChild(preview)
+          }, 'image/png')
+        })
+
+        // Also download icon-32 as favicon.ico (browsers accept .png renamed to .ico)
+        const canvas = document.createElement('canvas')
+        canvas.width = 32
+        canvas.height = 32
+        canvas.getContext('2d').drawImage(img, 0, 0, 32, 32)
+        canvas.toBlob(blob => {
+          const a = document.createElement('a')
+          a.href = URL.createObjectURL(blob)
+          a.download = 'favicon.ico'
+          a.click()
+        }, 'image/png')
+
+        alert('Done! Move all downloaded files into your frontend/public/ folder.')
+      }
+      img.onerror = () => alert('Make sure you open this from http://localhost:3500 (run npm run dev first)')
+    }
+  </script>
 </body>
 </html>
