@@ -65,11 +65,11 @@ const Footer = () => {
             <h4 className="text-lg font-bold text-light-text dark:text-dark-text mb-4">Connect</h4>
             <div className="space-y-3 mb-4">
               <a
-                href="mailto:elyasyenealem@gmail.com"
+                href="mailto:elyasyenealem@awratech.com"
                 className="flex items-center space-x-2 text-sm text-light-textSecondary dark:text-dark-textSecondary hover:text-orange-500 transition-colors"
               >
                 <FiMail size={16} />
-                <span>elyasyenealem@gmail.com</span>
+                <span>elyasyenealem@awratech.com</span>
               </a>
               <a
                 href="tel:+251978210810"

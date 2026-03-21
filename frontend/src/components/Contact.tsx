@@ -40,8 +40,8 @@ const Contact = () => {
     { 
       icon: FiMail, 
       label: 'Email', 
-      value: 'elyasyenealem@gmail.com', 
-      link: 'mailto:elyasyenealem@gmail.com',
+      value: 'elyasyenealem@awratech.com', 
+      link: 'mailto:elyasyenealem@awratech.com',
       color: 'text-red-500'
     },
     { 
