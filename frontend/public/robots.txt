@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://elyasyenealem.vercel.app/sitemap.xml
+Sitemap: https://elyas.awratech.com/sitemap.xml
