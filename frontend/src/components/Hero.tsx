@@ -88,7 +88,7 @@ const Hero = () => {
               <a href="https://www.instagram.com/el_yas_21/" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-light-cardHover dark:bg-dark-cardHover rounded-full hover:bg-orange-500 hover:text-white transition-all transform hover:scale-110">
                 <FiInstagram size={20} />
               </a>
-              <a href="mailto:elyasyenealem@gmail.com" className="p-2.5 bg-light-cardHover dark:bg-dark-cardHover rounded-full hover:bg-orange-500 hover:text-white transition-all transform hover:scale-110">
+              <a href="mailto:elyasyenealem@awratech.com" className="p-2.5 bg-light-cardHover dark:bg-dark-cardHover rounded-full hover:bg-orange-500 hover:text-white transition-all transform hover:scale-110">
                 <FiMail size={20} />
               </a>
             </div>
