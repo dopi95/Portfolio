@@ -5,10 +5,45 @@ import { FiBriefcase, FiBook } from 'react-icons/fi'
 import GitHubStats from './GitHubStats'
 import { API_BASE_URL } from '../config'
 
+const fallbackExperiences = [
+  {
+    title: 'University & Bootcamp Projects',
+    company: 'Academic & Training Projects',
+    location: 'Addis Ababa, Ethiopia',
+    startDate: '2022',
+    endDate: '',
+    description: 'Completed various university projects and bootcamp assignments. Collaborated with teams on full-stack applications using MERN stack technologies.',
+  },
+  {
+    title: 'Full Stack Developer - BiruhKids Pediatric Clinic',
+    company: 'Freelance Team Project',
+    location: 'Addis Ababa, Ethiopia',
+    startDate: '2024',
+    endDate: '2024',
+    description: 'Developed a comprehensive digital healthcare platform for BiruhKids Pediatric Clinic in Addis Ababa. Handled backend development, UI/UX design, and frontend implementation.',
+  },
+  {
+    title: 'Full Stack Developer - Bluelight Academy SMS',
+    company: 'Solo Freelance Project',
+    location: 'Addis Ababa, Ethiopia',
+    startDate: '2024',
+    endDate: '2024',
+    description: 'Built a comprehensive school management system for Bluelight Academy independently. Handled all aspects including UI/UX design, frontend development, backend architecture, and database design.',
+  },
+  {
+    title: 'Real Estate Website Developer',
+    company: 'Freelance Team Project',
+    location: 'Addis Ababa, Ethiopia',
+    startDate: '2024',
+    endDate: '2024',
+    description: 'Developed a website for a real estate sales agent as part of a team. Contributed to UI/UX design, frontend development, and backend implementation.',
+  }
+]
+
 const Experience = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
-  const [experiences, setExperiences] = useState<any[]>([])
+  const [experiences, setExperiences] = useState<any[]>(fallbackExperiences)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -20,7 +55,7 @@ const Experience = () => {
       const response = await fetch(`${API_BASE_URL}/api/experiences`)
       if (response.ok) {
         const data = await response.json()
-        setExperiences(data)
+        if (data.length > 0) setExperiences(data)
       }
     } catch (error) {
       console.error('Error loading experiences:', error)
@@ -76,7 +111,16 @@ const Experience = () => {
                 className="p-6 rounded-2xl shadow-xl h-full bg-light-card dark:bg-dark-card lg:bg-transparent lg:dark:bg-transparent lg:shadow-none lg:p-0"
               >
                 {loading ? (
-                  <div className="text-center py-12 text-light-textSecondary dark:text-dark-textSecondary">Loading...</div>
+                  <div className="space-y-6 animate-pulse">
+                    {[...Array(4)].map((_, i) => (
+                      <div key={i} className="relative pl-6 border-l-2 border-orange-500/30 pb-6">
+                        <div className="absolute -left-2.5 top-0 w-5 h-5 bg-light-border dark:bg-dark-border rounded-full" />
+                        <div className="h-4 bg-light-border dark:bg-dark-border rounded w-3/4 mb-2" />
+                        <div className="h-3 bg-light-border dark:bg-dark-border rounded w-1/2 mb-2" />
+                        <div className="h-3 bg-light-border dark:bg-dark-border rounded w-full" />
+                      </div>
+                    ))}
+                  </div>
                 ) : (
                 <div className="space-y-6">
                   {experiences.map((exp, index) => (

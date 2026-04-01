@@ -36,16 +36,15 @@ mongoose.connect(process.env.MONGODB_URI!, {
   .then(async () => {
     console.log('MongoDB connected');
     
-    // Create default admin user
-    const existingUser = await User.findOne({ email: 'admin@portfolio.com' });
+    // Create admin user
+    const existingUser = await User.findOne({ email: 'elyasat594@gmail.com' });
     if (!existingUser) {
-      const defaultUser = new User({
-        email: 'admin@portfolio.com',
+      const adminUser = new User({
+        email: 'elyasat594@gmail.com',
         password: 'admin123',
         role: 'admin'
       });
-      await defaultUser.save();
-      console.log('Default admin user created: admin@portfolio.com / admin123');
+      await adminUser.save();
     }
   })
   .catch(err => console.error('MongoDB connection error:', err));

@@ -9,10 +9,37 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 
+const fallbackTestimonials = [
+  {
+    name: 'Dr. Fasil Menbere',
+    position: 'Pediatric Specialist, CEO & Founder at BiruhKids Pediatric Speciality',
+    message: 'Elyas delivered an exceptional healthcare platform for our clinic. His technical expertise and understanding of our needs resulted in a comprehensive system that has transformed how we serve our patients.',
+    rating: 5,
+    avatar: 'FM',
+    photo: ''
+  },
+  {
+    name: 'Mulugeta D.',
+    position: 'Real Estate Sales Consultant at Ghion Homes',
+    message: 'Working with Elyas was a great experience. He created a professional and sleek website that perfectly showcases our property listings and has significantly improved our client interactions.',
+    rating: 5,
+    avatar: 'MD',
+    photo: ''
+  },
+  {
+    name: 'Yenealem A.',
+    position: 'Founder & CEO at Bluelight Academy',
+    message: 'Elyas built an outstanding school management system for our academy. His dedication and technical skills resulted in a comprehensive platform that streamlined our entire administrative process.',
+    rating: 5,
+    avatar: 'YA',
+    photo: ''
+  }
+]
+
 const Testimonials = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
-  const [testimonials, setTestimonials] = useState<any[]>([])
+  const [testimonials, setTestimonials] = useState<any[]>(fallbackTestimonials)
   const [loading, setLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)
 
@@ -34,7 +61,7 @@ const Testimonials = () => {
       
       if (response.ok) {
         const data = await response.json()
-        setTestimonials(data)
+        if (data.length > 0) setTestimonials(data)
       }
     } catch (error) {
       console.error('Error loading testimonials:', error)

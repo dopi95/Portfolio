@@ -22,10 +22,36 @@ const iconMap: any = {
   VscCode, BiCodeAlt
 }
 
+const fallbackSkills = [
+  { name: 'HTML5', percent: 95, icon: 'FaHtml5', color: '#E34F26', category: 'Frontend' },
+  { name: 'CSS3', percent: 90, icon: 'FaCss3Alt', color: '#1572B6', category: 'Frontend' },
+  { name: 'JavaScript', percent: 90, icon: 'SiJavascript', color: '#F7DF1E', category: 'Frontend' },
+  { name: 'React', percent: 90, icon: 'FaReact', color: '#61DAFB', category: 'Frontend' },
+  { name: 'Next.js', percent: 85, icon: 'SiNextdotjs', color: '#000000', category: 'Frontend' },
+  { name: 'TypeScript', percent: 85, icon: 'SiTypescript', color: '#3178C6', category: 'Frontend' },
+  { name: 'Tailwind CSS', percent: 95, icon: 'SiTailwindcss', color: '#06B6D4', category: 'Frontend' },
+  { name: 'Node.js', percent: 88, icon: 'FaNodeJs', color: '#339933', category: 'Backend' },
+  { name: 'Express', percent: 90, icon: 'SiExpress', color: '#000000', category: 'Backend' },
+  { name: 'PHP', percent: 75, icon: 'FaPhp', color: '#777BB4', category: 'Backend' },
+  { name: 'MongoDB', percent: 85, icon: 'SiMongodb', color: '#47A248', category: 'Database' },
+  { name: 'PostgreSQL', percent: 80, icon: 'SiPostgresql', color: '#4169E1', category: 'Database' },
+  { name: 'MySQL', percent: 80, icon: 'SiMysql', color: '#4479A1', category: 'Database' },
+  { name: 'Java', percent: 85, icon: 'FaJava', color: '#007396', category: 'Programming Languages' },
+  { name: 'Python', percent: 88, icon: 'FaPython', color: '#3776AB', category: 'Programming Languages' },
+  { name: 'C++', percent: 80, icon: 'SiCplusplus', color: '#00599C', category: 'Programming Languages' },
+  { name: 'Git', percent: 90, icon: 'FaGitAlt', color: '#F05032', category: 'Tools & DevOps' },
+  { name: 'Docker', percent: 75, icon: 'FaDocker', color: '#2496ED', category: 'Tools & DevOps' },
+  { name: 'VS Code', percent: 95, icon: 'VscCode', color: '#007ACC', category: 'Tools & DevOps' },
+  { name: 'AWS', percent: 70, icon: 'FaAws', color: '#FF9900', category: 'Tools & DevOps' },
+  { name: 'Vercel', percent: 90, icon: 'SiVercel', color: '#000000', category: 'Deployment' },
+  { name: 'Netlify', percent: 85, icon: 'SiNetlify', color: '#00C7B7', category: 'Deployment' },
+  { name: 'Render', percent: 80, icon: 'SiRender', color: '#46E3B7', category: 'Deployment' },
+]
+
 const Skills = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
-  const [skills, setSkills] = useState<any[]>([])
+  const [skills, setSkills] = useState<any[]>(fallbackSkills)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -37,7 +63,7 @@ const Skills = () => {
       const response = await fetch(`${API_BASE_URL}/api/skills`)
       if (response.ok) {
         const data = await response.json()
-        setSkills(data)
+        if (data.length > 0) setSkills(data)
       }
     } catch (error) {
       console.error('Error loading skills:', error)
@@ -143,7 +169,21 @@ const Skills = () => {
           </h2>
           
           {loading ? (
-            <div className="text-center py-12 text-light-textSecondary dark:text-dark-textSecondary">Loading...</div>
+            <div className="space-y-12">
+              {[...Array(3)].map((_, catIndex) => (
+                <div key={catIndex} className="animate-pulse">
+                  <div className="h-7 bg-light-card dark:bg-dark-card rounded w-48 mb-6" />
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    {[...Array(4)].map((_, i) => (
+                      <div key={i} className="flex flex-col items-center">
+                        <div className="w-28 h-28 rounded-full bg-light-card dark:bg-dark-card" />
+                        <div className="h-4 bg-light-card dark:bg-dark-card rounded w-20 mt-2" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           ) : (
           <div className="space-y-12">
             {Object.keys(groupedSkills).map((category, catIndex) => (
