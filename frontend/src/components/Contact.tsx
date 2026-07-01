@@ -189,7 +189,7 @@ const Contact = () => {
   ]
 
   return (
-    <section id="contact" className="py-16 px-4 bg-light-cardHover dark:bg-dark-cardHover">
+    <section id="contact" className="py-16 px-4 bg-light-cardHover dark:bg-dark-cardHover overflow-x-hidden">
       <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}
@@ -237,14 +237,14 @@ const Contact = () => {
             </h2>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 w-full">
             {/* Contact Form */}
             <motion.form
               initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ delay: 0.4 }}
               onSubmit={handleSubmit}
-              className="space-y-4 md:order-2"
+              className="space-y-4 md:order-2 w-full min-w-0"
             >
               <div>
                 <label className="block text-sm font-semibold mb-2 text-light-text dark:text-dark-text">
@@ -280,34 +280,34 @@ const Contact = () => {
                 <label className="block text-sm font-semibold mb-2 text-light-text dark:text-dark-text">
                   Phone Number <span className="text-red-500">*</span>
                 </label>
-                <div className="flex gap-2">
+                <div className="flex gap-2 w-full min-w-0">
                   {/* Country Code Dropdown */}
-                  <div className="relative">
+                  <div className="relative flex-shrink-0">
                     <button
                       type="button"
                       onClick={() => setCountryOpen(!countryOpen)}
-                      className="flex items-center gap-1.5 px-3 py-3 rounded-lg bg-[#ffffff] dark:bg-[#1a1f3a] border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-gray-900 dark:text-white min-w-[90px] hover:border-orange-400 transition-colors"
+                      className="flex items-center gap-1 px-2 py-3 rounded-lg bg-[#ffffff] dark:bg-[#1a1f3a] border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500 text-gray-900 dark:text-white w-[100px] hover:border-orange-400 transition-colors"
                     >
-                      <span className={`fi fi-${formData.countryIso} text-base rounded-sm`} style={{ width: 20, height: 15, display: 'inline-block' }} />
-                      <span className="text-sm font-medium">{formData.countryCode}</span>
-                      <svg className={`w-3 h-3 text-gray-400 transition-transform ${countryOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <span className={`fi fi-${formData.countryIso} rounded-sm flex-shrink-0`} style={{ width: 18, height: 13, display: 'inline-block' }} />
+                      <span className="text-xs font-medium flex-shrink-0">{formData.countryCode}</span>
+                      <svg className={`w-3 h-3 text-gray-400 flex-shrink-0 ml-auto transition-transform ${countryOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>
                     </button>
                     {countryOpen && (
-                      <div className="absolute z-50 top-full left-0 mt-1 w-64 max-h-60 overflow-y-auto bg-white dark:bg-[#1a1f3a] border border-gray-200 dark:border-gray-600 rounded-xl shadow-2xl">
+                      <div className="absolute z-50 top-full left-0 mt-1 w-56 max-h-60 overflow-y-auto bg-white dark:bg-[#1a1f3a] border border-gray-200 dark:border-gray-600 rounded-xl shadow-2xl">
                         {countryCodes.map((country, i) => (
                           <button
                             key={i}
                             type="button"
                             onClick={() => { setPhoneError(''); setFormData({ ...formData, countryCode: country.code, countryIso: country.iso, phone: '' }); setCountryOpen(false) }}
-                            className={`w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-colors ${
+                            className={`w-full flex items-center gap-2 px-3 py-2.5 text-left hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-colors ${
                               formData.countryIso === country.iso ? 'bg-orange-50 dark:bg-orange-900/20' : ''
                             }`}
                           >
-                            <span className={`fi fi-${country.iso} rounded-sm flex-shrink-0`} style={{ width: 22, height: 16, display: 'inline-block' }} />
-                            <span className="text-sm text-gray-700 dark:text-gray-300 flex-1">{country.name}</span>
-                            <span className="text-sm font-semibold text-orange-500">{country.code}</span>
+                            <span className={`fi fi-${country.iso} rounded-sm flex-shrink-0`} style={{ width: 20, height: 15, display: 'inline-block' }} />
+                            <span className="text-sm text-gray-700 dark:text-gray-300 flex-1 truncate">{country.name}</span>
+                            <span className="text-xs font-semibold text-orange-500 flex-shrink-0">{country.code}</span>
                           </button>
                         ))}
                       </div>
@@ -335,7 +335,7 @@ const Contact = () => {
                         setFormData({ ...formData, phone: digits })
                       }
                     }}
-                    className={`flex-1 px-4 py-3 rounded-lg bg-[#ffffff] dark:bg-[#1a1f3a] border focus:outline-none focus:ring-2 text-gray-900 dark:text-white placeholder:text-gray-500 transition-colors ${
+                    className={`flex-1 min-w-0 px-3 py-3 rounded-lg bg-[#ffffff] dark:bg-[#1a1f3a] border focus:outline-none focus:ring-2 text-gray-900 dark:text-white placeholder:text-gray-500 transition-colors text-sm ${
                       phoneError
                         ? 'border-red-500 focus:ring-red-400'
                         : 'border-gray-300 dark:border-gray-600 focus:ring-orange-500'
