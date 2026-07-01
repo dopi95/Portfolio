@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { FiMail, FiUser, FiClock, FiSend, FiTrash2, FiCheck, FiX } from 'react-icons/fi'
+import { FiMail, FiUser, FiClock, FiSend, FiTrash2, FiCheck, FiX, FiPhone } from 'react-icons/fi'
 import { API_BASE_URL } from '../config'
 
 const Contacts = () => {
@@ -155,6 +155,15 @@ const Contacts = () => {
                       {contact.email}
                     </a>
                   </div>
+
+                  {contact.phone && (
+                    <div className="flex items-center space-x-2 mb-2">
+                      <FiPhone className="text-light-textSecondary dark:text-dark-textSecondary" size={16} />
+                      <a href={`tel:${contact.phone}`} className="text-sm text-orange-500 hover:underline">
+                        {contact.phone}
+                      </a>
+                    </div>
+                  )}
 
                   <div className="flex items-center space-x-2 mb-3">
                     <FiClock className="text-light-textSecondary dark:text-dark-textSecondary" size={16} />

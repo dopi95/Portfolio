@@ -25,13 +25,13 @@ const verifyToken = (req: any, res: any, next: any) => {
 // Submit contact form (public)
 router.post('/', async (req, res) => {
   try {
-    const { name, email, message } = req.body;
+    const { name, email, phone, message } = req.body;
+    const cleanPhone = phone && phone.trim().length > 4 ? phone.trim() : undefined;
 
-    const contact = new Contact({ name, email, message });
+    const contact = new Contact({ name, email, phone: cleanPhone, message });
     await contact.save();
 
-    // Send Telegram notification
-    await sendTelegramNotification(name, email, message);
+    await sendTelegramNotification(name, email, cleanPhone, message);
 
     res.json({ message: 'Message sent successfully' });
   } catch (error) {
