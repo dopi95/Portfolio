@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
 import { FiGithub, FiStar, FiGitBranch, FiUsers, FiGitCommit } from 'react-icons/fi'
+import { API_BASE_URL } from '../config'
 
 const GitHubStats = () => {
   const ref = useRef(null)
