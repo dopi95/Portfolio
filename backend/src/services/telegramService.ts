@@ -9,22 +9,14 @@ export const sendTelegramNotification = async (name: string, email: string, phon
     return false;
   }
 
-  const text = [
-    '🔔 <b>New Contact Message</b>',
-    '',
-    `👤 <b>Name:</b> ${name}`,
-    `📧 <b>Email:</b> ${email}`,
-    `📞 <b>Phone:</b> ${phone || 'Not provided'}`,
-    `💬 <b>Message:</b> ${message}`,
-    '',
-    `<i>Received at ${new Date().toLocaleString()}</i>`,
-  ].join('\n');
+  const phoneDisplay = phone && phone.trim().length > 0 ? phone.trim() : 'Not provided';
+
+  const text = `🔔 New Contact Message\n\n👤 Name: ${name}\n📧 Email: ${email}\n📞 Phone: ${phoneDisplay}\n💬 Message: ${message}\n\nReceived at ${new Date().toLocaleString()}`;
 
   try {
     await axios.post(`https://api.telegram.org/bot${botToken}/sendMessage`, {
       chat_id: chatId,
       text,
-      parse_mode: 'HTML'
     });
     return true;
   } catch (error) {

@@ -26,7 +26,8 @@ const verifyToken = (req: any, res: any, next: any) => {
 router.post('/', async (req, res) => {
   try {
     const { name, email, phone, message } = req.body;
-    const cleanPhone = phone && phone.trim().length > 4 ? phone.trim() : undefined;
+    console.log('Contact form received:', { name, email, phone, message });
+    const cleanPhone = phone && typeof phone === 'string' && phone.replace(/[^0-9]/g, '').length >= 7 ? phone.trim() : undefined;
 
     const contact = new Contact({ name, email, phone: cleanPhone, message });
     await contact.save();
