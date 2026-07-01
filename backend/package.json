@@ -5,7 +5,12 @@
   "scripts": {
     "dev": "nodemon src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "seed:experiences": "ts-node src/seed/experiences.ts",
+    "seed:projects": "ts-node src/seed/projects.ts",
+    "seed:skills": "ts-node src/seed/skills.ts",
+    "seed:all": "ts-node src/seed/experiences.ts && ts-node src/seed/projects.ts && ts-node src/seed/skills.ts && ts-node src/seed/education.ts",
+    "seed:education": "ts-node src/seed/education.ts"
   },
   "dependencies": {
     "@getbrevo/brevo": "^4.0.1",
@@ -32,6 +37,7 @@
   },
   "devDependencies": {
     "nodemon": "^3.0.2",
+    "pdf-parse": "^2.4.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }

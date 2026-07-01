@@ -1,35 +1,29 @@
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { FiBook } from 'react-icons/fi'
+
+const education = [
+  {
+    id: 1,
+    degree: 'BSc in Computer Science',
+    institution: 'Unity University',
+    location: 'Addis Ababa, Ethiopia',
+    graduationDate: 'March 2026',
+    description: 'Relevant Coursework: Data Structures & Algorithms, Database Systems, AI, Web Security, Software Engineering.'
+  },
+  {
+    id: 2,
+    degree: 'BA in Business Administration and Information System',
+    institution: 'Addis Ababa University',
+    location: 'Addis Ababa, Ethiopia',
+    graduationDate: 'June 2026',
+    description: ''
+  }
+]
 
 const Education = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
-
-  const education = [
-    {
-      degree: 'Bachelor of Science in Computer Science',
-      institution: 'Unity University',
-      period: '2022 - January 2026',
-      status: 'Currently 5th Year Student',
-      description: 'Specializing in Software Engineering and Web Development. Completed multiple university projects and gaining hands-on experience with modern technologies.'
-    },
-    {
-      degree: 'Bachelor of Arts in BAIS (Business Administration and Information Systems)',
-      institution: 'Addis Ababa University',
-      period: '2022 - January 2026',
-      status: 'Currently 5th Year Student',
-      description: 'Studying the intersection of business and technology, with coursework in management, information systems, and data analysis.'
-    },
-    {
-      degree: 'Full Stack Web Development Bootcamp (MERN Stack)',
-      institution: 'DirectEd Bootcamp',
-      period: '',
-      status: '',
-      description: 'Intensive program covering MongoDB, Express.js, React, and Node.js. Working on team projects and building full-stack applications.'
-    }
-  ]
 
   return (
     <section id="education" className="py-16 px-4">
@@ -45,7 +39,7 @@ const Education = () => {
               Education
             </h2>
           </div>
-          
+
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -55,45 +49,42 @@ const Education = () => {
             <div className="space-y-8">
               {education.map((edu, index) => (
                 <motion.div
-                  key={index}
+                  key={edu.id}
                   initial={{ opacity: 0, x: -30 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: 0.3 + index * 0.15 }}
                   className="relative pl-8 border-l-2 border-orange-500/30 pb-8 last:pb-0"
                 >
-                  {/* Timeline dot */}
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={isInView ? { scale: 1 } : {}}
                     transition={{ delay: 0.4 + index * 0.15 }}
                     className="absolute -left-3 top-0 w-6 h-6 bg-orange-500 rounded-full border-4 border-light-card dark:border-dark-card md:border-light-bg md:dark:border-dark-bg"
                   />
-                  
+
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex-1">
                       <h3 className="text-base md:text-lg font-bold text-light-text dark:text-dark-text mb-1">
                         {edu.degree}
                       </h3>
                       <p className="text-sm text-orange-500 font-semibold mb-1">{edu.institution}</p>
-                      {edu.period && (
-                        <p className="text-xs text-light-textSecondary dark:text-dark-textSecondary mb-1">
-                          {edu.period}
-                        </p>
-                      )}
-                      {edu.status && (
-                        <p className="text-xs text-light-textSecondary dark:text-dark-textSecondary mb-3 italic">
-                          {edu.status}
-                        </p>
-                      )}
+                      <p className="text-xs text-light-textSecondary dark:text-dark-textSecondary mb-1">
+                        {edu.location}
+                      </p>
+                      <p className="text-xs text-light-textSecondary dark:text-dark-textSecondary mb-3">
+                        Graduation Date: {edu.graduationDate}
+                      </p>
                     </div>
                     <div className="p-2 bg-orange-100 dark:bg-orange-900/30 rounded-lg ml-4">
                       <FiBook className="text-orange-500" size={18} />
                     </div>
                   </div>
-                  
-                  <p className="text-sm text-light-textSecondary dark:text-dark-textSecondary leading-relaxed">
-                    {edu.description}
-                  </p>
+
+                  {edu.description && (
+                    <p className="text-sm text-light-textSecondary dark:text-dark-textSecondary leading-relaxed">
+                      {edu.description}
+                    </p>
+                  )}
                 </motion.div>
               ))}
             </div>

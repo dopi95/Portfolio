@@ -6,76 +6,94 @@ dotenv.config()
 
 const projects = [
   {
-    title: 'BiruhKids Pediatric Clinic Platform',
-    description: 'A professional freelance project completed in a team, creating a comprehensive digital healthcare platform for BiruhKids Pediatric Clinic in Addis Ababa, featuring online appointment booking, AI-powered chatbot, multi-role authentication, and bilingual support for pediatric care.',
-    technologies: ['React', 'Node', 'Express', 'MongoDB', 'Javascript', 'TailwindCSS'],
-    liveUrl: 'https://www.biruhkidsclinic.com/',
-    githubUrl: 'https://github.com/dopi95/BiruhKids-Pediatric-Speciality',
-    image: 'https://images.unsplash.com/photo-1581056771107-24ca5f033842?w=400&h=300&fit=crop',
+    title: 'Bluelight Academy – School Management System',
+    description: 'A comprehensive full-stack School Management System integrating the public website and student portal into a unified platform. Features role-based authentication for Administrators, Teachers, and Students, complete academic management modules, RESTful APIs, and responsive dashboards.',
+    technologies: ['Next.js', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Tailwind CSS'],
+    liveUrl: 'https://bluelight.edu.et',
+    githubUrl: 'https://github.com/dopi95/School-Management-System',
+    image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&h=300&fit=crop',
+    featured: true,
     order: 1
   },
   {
-    title: 'Ghion Homes Sales',
-    description: 'A professional freelance project completed in a team, creating a sleek real estate website to showcase listings and simplify client interactions for a Ghion Homes sales representative.',
-    technologies: ['HTML', 'CSS', 'Javascript', 'Node', 'Express', 'PostgreSQL'],
-    liveUrl: 'https://ghionhomessales.com/',
-    githubUrl: 'https://github.com/dopi95/Ghion-Homes-Sales',
-    image: 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=400&h=300&fit=crop',
+    title: 'MT Body Oil Boutique',
+    description: 'A custom full-stack e-commerce platform for a U.S.-based perfume and body oil retailer. Features Stripe payment integration, Shippo shipping automation, responsive storefront with product catalog, shopping cart, customer accounts, and order management.',
+    technologies: ['Next.js', 'NestJS', 'TypeScript', 'Tailwind CSS', 'Stripe', 'Shippo', 'PostgreSQL'],
+    liveUrl: '',
+    githubUrl: '',
+    image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&h=300&fit=crop',
+    featured: true,
     order: 2
   },
   {
-    title: 'Bluelight Academy SMS',
-    description: 'A comprehensive full-stack school management system built for Bluelight Academy in Addis Ababa. Features complete administrative control over students, employees, payments, and system management with advanced role-based access control.',
-    technologies: ['React', 'Node', 'Express', 'MongoDB', 'Javascript', 'TailwindCSS'],
+    title: 'Fresh Corner E-Commerce Platform',
+    description: 'A full-stack e-commerce platform for grocery shopping with secure authentication, product management, shopping cart, order tracking, and payment integration. Features JWT authentication, Cloudinary image uploads, and Chapa/Telebirr payments for the Ethiopian market.',
+    technologies: ['React', 'Redux Toolkit', 'Tailwind CSS', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Cloudinary', 'Chapa'],
     liveUrl: '',
-    githubUrl: 'https://github.com/dopi95/School-Management-System',
-    image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&h=300&fit=crop',
+    githubUrl: '',
+    image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop',
+    featured: true,
     order: 3
   },
   {
-    title: 'Nova Studio Ethiopia',
-    description: 'Premier creative production agency website in Addis Ababa, Ethiopia. Features multilingual support (English/Amharic), professional photography and videography showcase, social media management services, and digital marketing solutions with modern UI/UX.',
-    technologies: ['React', 'TypeScript', 'TailwindCSS', 'i18next', 'Vite', 'EmailJS'],
-    liveUrl: 'https://novastudio.et',
-    githubUrl: 'https://github.com/dopi95/Nova-Studio',
-    image: 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=400&h=300&fit=crop',
+    title: 'Biruh Kids Pediatric Clinic Platform',
+    description: 'A clinic management platform digitizing appointment scheduling and patient record management. Features secure role-based authentication, bilingual support (English/Amharic), dashboards for appointments and patient information, and automated administrative workflows.',
+    technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Tailwind CSS'],
+    liveUrl: 'https://www.biruhkidsclinic.com/',
+    githubUrl: 'https://github.com/dopi95/BiruhKids-Pediatric-Speciality',
+    image: 'https://images.unsplash.com/photo-1581056771107-24ca5f033842?w=400&h=300&fit=crop',
+    featured: false,
     order: 4
   },
   {
-    title: 'Beton Kegna - Real Estate Sales Website',
-    description: 'A modern, responsive full-stack website for Beton Kegna real estate sales, showcasing luxury apartments, villas, and commercial properties in Addis Ababa with bilingual support, interactive galleries, and admin dashboard.',
-    technologies: ['Next.js', 'TypeScript', 'Node', 'Express', 'MongoDB', 'TailwindCSS'],
-    liveUrl: 'https://betonkegna.vercel.app/',
-    githubUrl: 'https://github.com/dopi95/BK',
-    image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&h=300&fit=crop',
+    title: 'AAU E-Learning System',
+    description: 'A full-stack e-learning platform supporting course management, assignments, exams, attendance, and real-time communication. Features JWT authentication, role-based access control, payment integration, and AI-powered chatbot using Groq AI (LLaMA 3.3).',
+    technologies: ['React', 'Tailwind CSS', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Groq AI', 'Cloudinary', 'Chapa'],
+    liveUrl: '',
+    githubUrl: '',
+    image: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=400&h=300&fit=crop',
+    featured: false,
     order: 5
+  },
+  {
+    title: 'Ghion Homes Sales',
+    description: 'A real estate website showcasing residential properties with detailed listings and image galleries. Features a custom CMS for administrators, bilingual support (English/Amharic), and customer inquiry forms.',
+    technologies: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'Express', 'PostgreSQL'],
+    liveUrl: 'https://ghionhomessales.com/',
+    githubUrl: 'https://github.com/dopi95/Ghion-Homes-Sales',
+    image: 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=400&h=300&fit=crop',
+    featured: false,
+    order: 6
+  },
+  {
+    title: 'NoteDown Blogging Platform',
+    description: 'A modern full-stack blogging platform with authentication, blog management, comments, likes, and image uploads. Features secure REST APIs with JWT, AI-powered writing assistance, API rate limiting with Upstash Redis, and dark/light mode.',
+    technologies: ['React.js', 'Tailwind CSS', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Multer', 'Upstash Redis'],
+    liveUrl: 'https://notedowny.netlify.app/',
+    githubUrl: 'https://github.com/Ishimweric/blogging_app',
+    image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&h=300&fit=crop',
+    featured: false,
+    order: 7
   },
   {
     title: 'Kab Creative Lab',
     description: 'A full-stack web application for managing creative portfolios, projects, and client communications. Features admin panel, user dashboard, portfolio showcase with media gallery, and JWT authentication.',
-    technologies: ['Next.js', 'React', 'TypeScript', 'Node', 'Express', 'MongoDB', 'TailwindCSS'],
+    technologies: ['Next.js', 'React', 'TypeScript', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS'],
     liveUrl: 'https://kabcreativelab.com',
     githubUrl: 'https://github.com/dopi95/Kab',
     image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop',
-    order: 6
-  },
-  {
-    title: 'Artisan Blend Restaurant App',
-    description: 'A collaborative bootcamp project to build a dynamic and interactive web application for a fictional high-end restaurant called Artisan Blend. It features an immersive frontend experience alongside an AI-powered backend chatbot.',
-    technologies: ['React', 'Vite', 'TailwindCSS', 'Python'],
-    liveUrl: 'https://artisan-blend.netlify.app/',
-    githubUrl: 'https://github.com/dopi95/ArtisanBlend-Restaurant-App',
-    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop',
-    order: 7
-  },
-  {
-    title: 'NoteDown - Modern Blogging Platform',
-    description: 'A collaborative bootcamp project creating a full-stack blogging application with CRUD operations, JWT authentication, image uploads, comments system, likes functionality, and AI chatbot integration.',
-    technologies: ['React', 'Node', 'Express', 'MongoDB', 'Javascript', 'TailwindCSS', 'Python'],
-    liveUrl: 'https://notedowny.netlify.app/',
-    githubUrl: 'https://github.com/Ishimweric/blogging_app',
-    image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&h=300&fit=crop',
+    featured: false,
     order: 8
+  },
+  {
+    title: 'Nova Studio Ethiopia',
+    description: 'Premier creative production agency website in Addis Ababa. Features multilingual support (English/Amharic), professional photography and videography showcase, social media management services, and digital marketing solutions.',
+    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'i18next', 'Vite', 'EmailJS'],
+    liveUrl: 'https://novastudio.et',
+    githubUrl: 'https://github.com/dopi95/Nova-Studio',
+    image: 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=400&h=300&fit=crop',
+    featured: false,
+    order: 9
   }
 ]
 

@@ -19,26 +19,16 @@ const GitHubStats = () => {
   useEffect(() => {
     const fetchGitHubStats = async () => {
       try {
-        const userResponse = await fetch('https://api.github.com/users/dopi95')
-        const userData = await userResponse.json()
-        
-        const reposResponse = await fetch('https://api.github.com/users/dopi95/repos?per_page=100')
-        const reposData = await reposResponse.json()
-        
-        const totalStars = reposData.reduce((acc: number, repo: any) => acc + repo.stargazers_count, 0)
-        
-        // Fetch contribution data
-        const eventsResponse = await fetch('https://api.github.com/users/dopi95/events/public?per_page=100')
-        const eventsData = await eventsResponse.json()
-        const totalCommits = eventsData.filter((event: any) => event.type === 'PushEvent').length
-        
+        const response = await fetch(`${API_BASE_URL}/api/github/stats`)
+        if (!response.ok) return
+        const data = await response.json()
         setStats({
-          repos: userData.public_repos,
-          followers: userData.followers,
-          following: userData.following,
-          totalStars,
-          totalCommits,
-          currentStreak: 0, // GitHub API doesn't provide streak data directly
+          repos: data.repos,
+          followers: data.followers,
+          following: 0,
+          totalStars: data.totalStars,
+          totalCommits: data.totalCommits,
+          currentStreak: 0,
           longestStreak: 0
         })
       } catch (error) {

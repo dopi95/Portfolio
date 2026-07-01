@@ -12,6 +12,7 @@ import projectRoutes from './routes/projects';
 import experienceRoutes from './routes/experiences';
 import testimonialRoutes from './routes/testimonials';
 import uploadRoutes from './routes/upload';
+import educationRoutes from './routes/education';
 import User from './models/User';
 
 // Load .env from backend directory
@@ -56,6 +57,7 @@ app.use('/api/skills', skillRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/experiences', experienceRoutes);
 app.use('/api/testimonials', testimonialRoutes);
+app.use('/api/education', educationRoutes);
 app.use('/api/upload', uploadRoutes);
 
 app.get('/', (req, res) => {

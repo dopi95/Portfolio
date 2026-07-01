@@ -66,25 +66,18 @@ const Experience = () => {
 
   const education = [
     {
-      degree: 'Bachelor of Science in Computer Science',
+      degree: 'BSc in Computer Science',
       institution: 'Unity University',
-      period: '2022 - April 2026',
-      status: 'Graduated',
-      description: 'Specialized in Software Engineering and Web Development. Completed multiple university projects and gained hands-on experience with modern technologies.'
+      location: 'Addis Ababa, Ethiopia',
+      graduationDate: 'March 2026',
+      description: ''
     },
     {
-      degree: 'Bachelor of Arts in BAIS',
+      degree: 'BA in Business Administration and Information System',
       institution: 'Addis Ababa University',
-      period: '2022 - July 2026',
-      status: 'Currently 5th Year Student',
-      description: 'Studying the intersection of business and technology, with coursework in management, information systems, and data analysis.'
-    },
-    {
-      degree: 'Full Stack Web Development Bootcamp',
-      institution: 'DirectEd Bootcamp',
-      period: '',
-      status: '',
-      description: 'Intensive program covering MongoDB, Express.js, React, and Node.js. Working on team projects and building full-stack applications.'
+      location: 'Addis Ababa, Ethiopia',
+      graduationDate: 'June 2026',
+      description: ''
     }
   ]
 
@@ -197,25 +190,23 @@ const Experience = () => {
                             {edu.degree}
                           </h3>
                           <p className="text-xs text-orange-500 font-semibold mb-1">{edu.institution}</p>
-                          {edu.period && (
-                            <p className="text-xs text-light-textSecondary dark:text-dark-textSecondary mb-1">
-                              {edu.period}
-                            </p>
-                          )}
-                          {edu.status && (
-                            <p className="text-xs text-light-textSecondary dark:text-dark-textSecondary mb-2 italic">
-                              {edu.status}
-                            </p>
-                          )}
+                          <p className="text-xs text-light-textSecondary dark:text-dark-textSecondary mb-1">
+                            {edu.location}
+                          </p>
+                          <p className="text-xs text-light-textSecondary dark:text-dark-textSecondary mb-2">
+                            Graduation Date: {edu.graduationDate}
+                          </p>
                         </div>
                         <div className="p-1.5 bg-orange-100 dark:bg-orange-900/30 rounded-lg ml-2">
                           <FiBook className="text-orange-500" size={16} />
                         </div>
                       </div>
                       
+                      {edu.description && (
                       <p className="text-xs text-light-textSecondary dark:text-dark-textSecondary leading-relaxed">
                         {edu.description}
                       </p>
+                      )}
                     </motion.div>
                   ))}
                 </div>
