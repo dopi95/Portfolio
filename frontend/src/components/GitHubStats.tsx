@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
-import { FiGithub, FiStar, FiGitBranch, FiUsers } from 'react-icons/fi'
+import { FiGithub, FiStar, FiGitBranch, FiUsers, FiActivity } from 'react-icons/fi'
 
 const GITHUB_USERNAME = 'dopi95'
-const FALLBACK = { repos: 52, followers: 13, totalStars: 0 }
+const FALLBACK = { repos: 52, followers: 13, totalStars: 1260, contributions: 1131 }
 
 const GitHubStats = () => {
   const ref = useRef(null)
@@ -14,21 +14,23 @@ const GitHubStats = () => {
   useEffect(() => {
     Promise.all([
       fetch(`https://api.github.com/users/${GITHUB_USERNAME}`, { headers: { 'User-Agent': 'portfolio' } }).then(r => r.json()),
-      fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100`, { headers: { 'User-Agent': 'portfolio' } }).then(r => r.json()),
-    ]).then(([user, repos]) => {
-      if (user.public_repos) {
-        const totalStars = Array.isArray(repos)
-          ? repos.reduce((sum: number, r: any) => sum + (r.stargazers_count || 0), 0)
-          : 0
-        setStats({ repos: user.public_repos, followers: user.followers, totalStars })
-      }
+      fetch(`https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}`).then(r => r.json()),
+    ]).then(([user, contrib]) => {
+      const allTime = Object.values(contrib?.total || {}).reduce((s: number, v: any) => s + v, 0)
+      setStats({
+        repos: user.public_repos || FALLBACK.repos,
+        followers: user.followers || FALLBACK.followers,
+        totalStars: allTime as number,
+        contributions: contrib?.total?.lastYear || FALLBACK.contributions,
+      })
     }).catch(() => {})
   }, [])
 
   const statCards = [
     { icon: FiGitBranch, value: stats.repos, label: 'Repositories' },
     { icon: FiUsers, value: stats.followers, label: 'Followers' },
-    { icon: FiStar, value: stats.totalStars, label: 'Total Stars' },
+    { icon: FiActivity, value: `${stats.contributions}+`, label: 'Contributions/Year' },
+    { icon: FiStar, value: `${stats.totalStars}+`, label: 'Total Commits' },
   ]
 
   return (
@@ -40,7 +42,7 @@ const GitHubStats = () => {
       className="max-w-4xl mx-auto bg-light-card dark:bg-dark-card p-6 rounded-2xl shadow-xl"
     >
       {/* Stat Cards */}
-      <div className="grid grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
         {statCards.map((s, i) => (
           <motion.div
             key={i}
@@ -79,7 +81,7 @@ const GitHubStats = () => {
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ delay: 0.7 }}
-        className="mb-8"
+        className="mb-3"
       >
         <h3 className="text-base font-bold text-light-text dark:text-dark-text mb-3 text-center">Contribution Activity</h3>
         <div className="overflow-x-auto rounded-xl bg-[#0d1117] p-3">
@@ -90,10 +92,13 @@ const GitHubStats = () => {
             style={{ minWidth: 600, maxWidth: '100%' }}
           />
         </div>
+        <p className="mt-3 text-center text-sm text-light-textSecondary dark:text-dark-textSecondary">
+          <span className="font-bold text-orange-500">{stats.contributions}+</span> contributions in the last year
+        </p>
       </motion.div>
 
       {/* Button */}
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-6">
         <motion.a
           href={`https://github.com/${GITHUB_USERNAME}`}
           target="_blank"
