@@ -9,10 +9,7 @@ const skillSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  percent: {
-    type: Number,
-    required: true
-  },
+
   icon: {
     type: String,
     required: true

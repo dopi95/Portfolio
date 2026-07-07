@@ -190,7 +190,7 @@ const ContentManager = () => {
                     <>
                       <h3 className="font-bold text-light-text dark:text-dark-text">{item.name}</h3>
                       <p className="text-sm text-light-textSecondary dark:text-dark-textSecondary">
-                        {item.category} - {item.percent}%
+                        {item.category} · {item.icon} · <span style={{ color: item.color }}>{item.color}</span>
                       </p>
                     </>
                   )}
@@ -322,14 +322,6 @@ const FormModal = ({ section, item, onSave, onClose }: any) => {
                 placeholder="Category"
                 value={formData.category || ''}
                 onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                className="w-full px-4 py-2 bg-light-cardHover dark:bg-dark-cardHover border border-light-border dark:border-dark-border rounded-lg text-light-text dark:text-dark-text"
-                required
-              />
-              <input
-                type="number"
-                placeholder="Percent"
-                value={formData.percent || ''}
-                onChange={(e) => setFormData({ ...formData, percent: parseInt(e.target.value) })}
                 className="w-full px-4 py-2 bg-light-cardHover dark:bg-dark-cardHover border border-light-border dark:border-dark-border rounded-lg text-light-text dark:text-dark-text"
                 required
               />
