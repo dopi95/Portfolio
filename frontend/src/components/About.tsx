@@ -78,9 +78,9 @@ const About = () => {
 
               {/* Awra Tech */}
               <div>
-                <h3 className="text-base md:text-lg font-bold text-orange-500 mb-2">Founder of Awra Tech</h3>
+                <h3 className="text-base md:text-lg font-bold text-orange-500 mb-2">Co-Founder of Awra Tech</h3>
                 <p className="text-sm md:text-base text-light-textSecondary dark:text-dark-textSecondary leading-relaxed">
-                  In 2023, I founded <span className="font-bold text-orange-500">Awra Tech</span>, a software development company focused on building real-world digital solutions that solve practical problems. We work both independently and as a team, delivering modern, scalable products using technologies like Next.js, TypeScript, Node.js, and React Native.
+                  In 2023, we came together as a team and co-founded <span className="font-bold text-orange-500">Awra Tech</span> — a software development company built on collaboration, focused on delivering real-world digital solutions that solve practical problems. Together, we build modern, scalable products using technologies like Next.js, TypeScript, Node.js, and React Native.
                 </p>
                 <a
                   href="https://awratech.com"
